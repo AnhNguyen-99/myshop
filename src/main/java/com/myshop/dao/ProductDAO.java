@@ -52,30 +52,30 @@ public class ProductDAO {
 	// Find by id
 	public Product findById(final int productId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.get(Product.class, productId);
+		return (Product) session.createQuery("FROM Product WHERE productId =:productId").setInteger("productId", productId);
 	}
 	
 	// Getall
 	public List<Product> getAll(){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product", Product.class).getResultList();
+		return session.createQuery("FROM Product").list();
 	}
 	
 	// List ProductSale
 	public List<Product> getListBySale(int limit){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product ORDER BY productSale DESC", Product.class).setMaxResults(limit).getResultList();
+		return session.createQuery("FROM Product ORDER BY productSale DESC").setMaxResults(limit).list();
 	}
 	
 	// listProductPrice
 	public List<Product> getListByPrice(int limit){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product ORDER BY productPrice DESC", Product.class).setMaxResults(limit).getResultList();
+		return session.createQuery("FROM Product ORDER BY productPrice DESC").setMaxResults(limit).list();
 	}
 	
 	public List<Product> getListNav(Integer offset, Integer maxResult){
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product ORDER BY createDate DESC", Product.class).setFirstResult(offset == null?0:offset).setMaxResults(maxResult == null?3:maxResult).getResultList();
+		List<Product> list = session.createQuery("FROM Product ORDER BY createDate DESC").setFirstResult(offset == null?0:offset).setMaxResults(maxResult == null?3:maxResult).list();
 //		query.setFirstResult();
 //        query.setMaxResults();
 //        List<Product> list = query.getResultList();
@@ -84,18 +84,18 @@ public class ProductDAO {
 	
 	public int totalItem() {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product", Product.class).getResultList().size();
+		return session.createQuery("FROM Product").list().size();
 	}
 	
 	public List<Product> getListByCategoryAndLimit(Integer categoryId, Integer offset, Integer maxResalt){
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).setFirstResult(offset == null?0:offset).setMaxResults(maxResalt == null?6:maxResalt).getResultList();
+		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId").setParameter("categoryId", categoryId).setFirstResult(offset == null?0:offset).setMaxResults(maxResalt == null?6:maxResalt).list();
 		return list;
 	}
 	
 	public int totalProductByCategoryId(Integer categoryId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).getResultList();
+		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId").setParameter("categoryId", categoryId).list();
 		return list.size();
 	}
 }

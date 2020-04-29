@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Category {
 	@Column(name = "createDate")
 	private Date createDate;
 	
-	@OneToMany(mappedBy = "categoryId")
+	@OneToMany(mappedBy = "categoryId", cascade = CascadeType.ALL)
 	public Collection<Product> product;
 
 	public Category() {

@@ -40,12 +40,12 @@ public class OrderDAO {
     
     public List<Order> getAll(){
     	Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Order", Order.class).getResultList();
+		return session.createQuery("FROM Order").list();
     }
     
     public List<Order> getOrderByAccountId(int accountId){
     	Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Order WHER accountId =:accountId", Order.class).setParameter("accountId", accountId).getResultList();
+		return session.createQuery("FROM Order WHER accountId =:accountId").setParameter("accountId", accountId).list();
     }
     
 //    public List<Order> getListNav(Integer offset, Integer maxResult);
@@ -54,7 +54,7 @@ public class OrderDAO {
     
     public int totalItem() {
     	Session session = this.sessionFactory.getCurrentSession();
-		int size = session.createQuery("FROM Order", Order.class).getResultList().size();
+		int size = session.createQuery("FROM Order").list().size();
 		return size;
     }
 }

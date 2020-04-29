@@ -36,7 +36,7 @@
                             <div class="head">Danh mục</div>
                             <ul class="main-categories">
                                 <c:forEach items="${listCategory}" var="item">
-                                    <li class="main-nav-list"><a href="${pageContext.request.contextPath}/findByCategoryId/${item.categoryId}.htm" aria-expanded="false" >
+                                    <li class="main-nav-list"><a href="${pageContext.request.contextPath}/findByCategoryId/${item.categoryId}" aria-expanded="false" >
                                             <span class="lnr lnr-arrow-right"></span>${item.categoryName}</a>
                                     </li>
                                 </c:forEach>

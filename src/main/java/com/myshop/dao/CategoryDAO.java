@@ -38,17 +38,17 @@ public class CategoryDAO {
 	// delete
 	public void delete(final Category category) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.remove(category);
+		session.delete(category);
 	}
 	
 	// getall
 	public List<Category> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Category", Category.class).getResultList();
+		return session.createQuery("FROM Category").list();
 	}
 	
 	public Category findById(final int categoryId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.get(Category.class, categoryId);
+		return (Category) session.createQuery("FROM Category WHERE categoryId =: categoryId").setInteger("categoryId", categoryId);
 	}
 }
