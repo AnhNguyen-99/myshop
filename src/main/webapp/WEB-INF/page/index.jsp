@@ -174,10 +174,7 @@
                 </div>
             </div>
         </section>
-        <!-- End category Area -->
 
-        <!-- List Product -->
-        <!-- start product Area -->
         <section class="owl-carousel active-product-area section_gap">
             <!-- single product slide -->
             <div class="single-product-slider">
@@ -186,9 +183,6 @@
                         <div class="col-lg-6 text-center">
                             <div class="section-title">
                                 <h1>Sản phẩm mới</h1>
-                        <!--        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore
-                                    magna aliqua.</p> -->
                             </div>
                         </div>
                     </div>

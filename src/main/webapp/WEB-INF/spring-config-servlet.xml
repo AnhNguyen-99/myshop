@@ -22,10 +22,6 @@
 		</property>
 	</bean>
 	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-   		<property name="maxUploadSize" value="268435456" />
-  	</bean>
-
 	<mvc:annotation-driven />
 	<mvc:resources location="/resources/" mapping="/resources/**" cache-period="31556926" />
 
@@ -65,18 +61,15 @@
 		transaction-manager="transactionManager" />
 
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="packagesToScan" value="com.myshop.entity" />
-		<property name="hibernateProperties"
-			value="classpath:hibernate.properties" />
+		<property name="hibernateProperties" value="classpath:hibernate.properties" />
 	</bean>
-
 
 </beans>

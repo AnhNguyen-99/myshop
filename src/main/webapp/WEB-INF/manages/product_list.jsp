@@ -6,6 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Product</title>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/page/img/fav.png">
 </head>
 <body>
 
@@ -58,7 +59,7 @@
 													<td style="text-align: center; width: 100px;">
 														${item.productSale}%</td>
 													<td style="text-align: center; width: 150px;">
-													<a class="btn btn-default" href="${pageContext.request.contextPath}/editProduct/${item.productId}"><i class="fa fa-edit"></i></a>
+													<a class="btn btn-default" href="${pageContext.request.contextPath}/edit/${item.productId}"><i class="fa fa-edit"></i></a>
 													<a class="btn btn-default" href="${pageContext.request.contextPath}/manages/product/remove/${item.productId}" onclick=" return confirm('Bạn có muốn xóa?')"><i class="fa fa-remove"></i></a>
 													</td>
 												</tr>

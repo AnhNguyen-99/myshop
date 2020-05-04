@@ -3,7 +3,7 @@
 <html lang="zxx" class="no-js">
 
     <head>
-        <title>Cart</title>
+        <title>Product</title>
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/page/img/fav.png">
     </head>
 

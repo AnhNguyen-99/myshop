@@ -30,7 +30,7 @@
 				|| document
 						.write('<script src="lib/modernizr/modernizr-custom.js"><\/script>')
 	</script>
-	<script src="lib/html5shiv/html5shiv.js"></script>
+	<script src="${pageContext.request.contextPath}/webapp/resources/manages/lib/html5shiv/html5shiv.js"></script>
 	<!-- Chartinator  -->
 	<script src="<c:url value="/resources/manages/js/chartinator.js" />"></script>
 	<script type="text/javascript">
@@ -118,7 +118,7 @@
 						class="dropdown-toggle" data-toggle="dropdown"
 						aria-expanded="false">
 							<div class="profile_img">
-								<span class="prfil-img"><img src="images/p1.png" alt="">
+								<span class="prfil-img"><img src="${pageContext.request.contextPath}/src/main/webapp/resources/manages/images/p1.png" alt="">
 								</span>
 								<div class="user-name">
 									<p>${sessionScope.myLogin.accountName}</p>

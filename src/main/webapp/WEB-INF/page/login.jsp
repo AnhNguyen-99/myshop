@@ -46,12 +46,12 @@
                     <div class="col-lg-6">
                         <div class="login_form_inner">
                             <h3>Đăng nhập</h3>
-                            <form:form class="row login_form" id="contactForm" method="POST" action="${pageContext.request.contextPath}/login.htm" modelAttribute="account">
+                            <form:form class="row login_form" id="contactForm" method="POST" action="${pageContext.request.contextPath}/login" modelAttribute="account">
                                 <div class="col-md-12 form-group">
-                                    <form:input type="text" class="form-control" path="accountName" placeholder="Tên đăng nhập"/>
+                                    <form:input type="text" class="form-control" path="accountName" placeholder="Tên đăng nhập" required="true"/>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <form:password class="form-control" path="accountPass" placeholder="Mật khẩu"/>
+                                    <form:password class="form-control" path="accountPass" placeholder="Mật khẩu" required="true"/>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="creat_account">

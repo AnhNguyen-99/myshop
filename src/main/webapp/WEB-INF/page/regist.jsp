@@ -36,7 +36,7 @@
                             <div class="login_form_inner">
                                 <h3>Tạo tài khoản</h3>
                                 <h3>${status}</h3>
-                            <form:form class="row login_form" id="contactForm" method="POST" action="${pageContext.request.contextPath}/create.htm" modelAttribute="account">
+                            <form:form class="row login_form" id="contactForm" method="POST" action="${pageContext.request.contextPath}/create" modelAttribute="account">
                                 <form:input type="hidden" path="accountId"/>
                                 <div class="col-md-12 form-group">
                                     <form:input type="text" class="form-control" path="accountName" placeholder="Tên tài khoản" required="true"/>

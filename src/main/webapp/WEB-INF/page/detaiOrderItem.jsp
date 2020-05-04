@@ -19,7 +19,7 @@
                         <div class="col-first">
                             <h1>Shopping Cart</h1>
                             <nav class="d-flex align-items-center">
-                                <a href="${pageContext.request.contextPath}/home.htm">Home<span class="lnr lnr-arrow-right"></span></a>
+                                <a href="${pageContext.request.contextPath}/home">Home<span class="lnr lnr-arrow-right"></span></a>
                             <a href="category.html">Cart</a>
                         </nav>
                     </div>
@@ -36,10 +36,10 @@
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div style="height: 50px;"></div>
                     <ul class="infomation">
-                        <li style="background-color: rgb(255,140,0);"><a href="${pageContext.request.contextPath}/inforaccount.htm">Thông tin</a></li>
-                        <li><a href="${pageContext.request.contextPath}/listOrders.htm">Lịch sử mua hàng</a></li>
-                        <li><a href="${pageContext.request.contextPath}/changeInfor.htm">Thay đổi thông tin</a></li>
-                        <li><a href="${pageContext.request.contextPath}/updatePass.htm">Thay đổi mật khẩu</a></li>
+                        <li style="background-color: rgb(255,140,0);"><a href="${pageContext.request.contextPath}/inforaccount">Thông tin</a></li>
+                        <li><a href="${pageContext.request.contextPath}/listOrders">Lịch sử mua hàng</a></li>
+                        <li><a href="${pageContext.request.contextPath}/changeInfor">Thay đổi thông tin</a></li>
+                        <li><a href="${pageContext.request.contextPath}/updatePass">Thay đổi mật khẩu</a></li>
                     </ul>
                 </div>
                 <div class="col-1">

@@ -42,7 +42,8 @@
                                     <div class="single-product">
                                         <img src="${pageContext.request.contextPath}/resources/page/img/product/${item.productImage}" width="255px" height="255px" alt="">
                                         <div class="product-details">
-                                            <a href="${pageContext.request.contextPath}/detailProduct/${item.productId}.htm"><h6>${item.productName}</h6></a>
+                                            <a href="${pageContext.request.contextPath}/detailProduct/${item.productId}">
+                                            	<h6>${item.productName}</h6></a>
                                             <div class="price">
                                                 <h6>${item.productPrice}</h6>
                                             <!--    <h6>${item.productSale}%</h6> -->
@@ -50,7 +51,7 @@
                                             </div>
                                             <div class="prd-bottom">
 
-                                                <a href="${pageContext.request.contextPath}/initAdd/${item.productId}.htm" class="social-info">
+                                                <a href="${pageContext.request.contextPath}/initAdd/${item.productId}" class="social-info">
                                                     <span class="ti-bag"></span>
                                                     <p class="hover-text">add to bag</p>
                                                 </a>
@@ -65,14 +66,10 @@
                             </c:forEach>
                         </div>
                     </section>
-                    <!-- End Best Seller -->
-                    <!-- Start Filter Bar -->
-                    
+
                 </div>
             </div>
-            <div>
-                <br>
-            </div>
+            
         </div>
                     
         <jsp:include page="footer.jsp"></jsp:include>

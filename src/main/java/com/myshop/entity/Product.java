@@ -55,7 +55,7 @@ public class Product {
 	private Date createDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
+	@JoinColumn(name = "categoryId", nullable = false)
 	private Category categoryId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

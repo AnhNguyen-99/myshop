@@ -52,25 +52,25 @@ public class ProductDAO {
 	// Find by id
 	public Product findById(final int productId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return (Product) session.createQuery("FROM Product WHERE productId =:productId").setInteger("productId", productId);
+		return session.get(Product.class, productId);
 	}
 	
 	// Getall
 	public List<Product> getAll(){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product").list();
+		return session.createQuery("FROM Product", Product.class).getResultList();
 	}
 	
 	// List ProductSale
 	public List<Product> getListBySale(int limit){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product ORDER BY productSale DESC").setMaxResults(limit).list();
+		return session.createQuery("FROM Product ORDER BY productSale DESC", Product.class).setMaxResults(limit).getResultList();
 	}
 	
 	// listProductPrice
 	public List<Product> getListByPrice(int limit){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product ORDER BY productPrice DESC").setMaxResults(limit).list();
+		return session.createQuery("FROM Product ORDER BY productPrice DESC", Product.class).setMaxResults(limit).getResultList();
 	}
 	
 	public List<Product> getListNav(Integer offset, Integer maxResult){
@@ -93,9 +93,19 @@ public class ProductDAO {
 		return list;
 	}
 	
+	public List<Product> getListByCategoryId(Integer categoryId){
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).getResultList();
+	}
 	public int totalProductByCategoryId(Integer categoryId) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId").setParameter("categoryId", categoryId).list();
 		return list.size();
+	}
+	
+	public List<Product> getListByProductName(String productName){
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Product> list = session.createQuery("FROM Product WHERE productName LIKE :productName").setString("productName", productName).list();
+		return list;
 	}
 }

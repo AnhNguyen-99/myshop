@@ -1,5 +1,6 @@
 package com.myshop.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ public class News {
 	@Id
 	@Column(name = "newsId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int newsId;
+	private Integer newsId;
 	
 	@Column(name = "title")
 	private String title;
@@ -29,12 +30,17 @@ public class News {
 	
 	@Column(name = "createDate")
 	private Date createDate;
-
-	public int getNewsId() {
+	
+	public News() {
+		Calendar c = Calendar.getInstance();
+		this.createDate = c.getTime();
+	}
+	
+	public Integer getNewsId() {
 		return newsId;
 	}
 
-	public void setNewsId(int newsId) {
+	public void setNewsId(Integer newsId) {
 		this.newsId = newsId;
 	}
 

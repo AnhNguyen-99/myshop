@@ -59,4 +59,13 @@ public class ProductService {
 	public int totalProductByCategoryId(Integer categoryId) {
 		return productDAO.totalProductByCategoryId(categoryId);
 	}
+	
+	public List<Product> getListByProductName(String productName){
+		return productDAO.getListByProductName(productName);
+	}
+	
+	public List<Product> getListByCategoryId(Integer categoryId){
+		return productDAO.getListByCategoryId(categoryId);
+	}
+	
 }

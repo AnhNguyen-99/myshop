@@ -20,7 +20,7 @@
 				<li><a href="${pageContext.request.contextPath}/manages/producer/list"><i class="fa fa-bank"></i><span>Nhà sản xuất</span></a></li>
 				<li><a href="${pageContext.request.contextPath}/manages/product/list"><i class="fa fa-bars"></i><span>Sản phẩm</span></a></li>
 				<li><a href="${pageContext.request.contextPath}/manages/order/list"><i class="fa fa-cart-plus"></i><span>Đơn hàng</span></a></li>
-				<li><a href="${pageContext.request.contextPath}/listNews"><i class="fa fa-book"></i><span>Tin tức</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/manages/news/list"><i class="fa fa-book"></i><span>Tin tức</span></a></li>
 				<li><a href="${pageContext.request.contextPath}/manages/account/list"><i class="fa fa-user"></i><span>Tài khoản</span></a></li>
 			</ul>
 		</div>
