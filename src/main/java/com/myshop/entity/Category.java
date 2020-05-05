@@ -4,9 +4,11 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +31,8 @@ public class Category {
 	@Column(name = "createDate")
 	private Date createDate;
 	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryId")
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryId")
 	public Collection<Product> product;
 

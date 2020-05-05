@@ -66,10 +66,10 @@ public class ControllerProduct {
 	// Upload
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String viewSaveProduct(@ModelAttribute("product") Product product, Model model, HttpServletRequest request) {
-		String path = request.getRealPath("/resorces/page/img/sd");
+		String path = request.getRealPath("/resorces/page/img/product");
 		System.out.println(path);
         path = path.substring(0, path.indexOf(".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps"));
-        path = path + "MyShop\\src\\main\\webapp\\resources\\page\\img\\sd";
+        path = path + "MyShop\\src\\main\\webapp\\resources\\page\\img\\product";
         System.out.println(path);
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);

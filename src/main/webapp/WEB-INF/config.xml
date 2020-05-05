@@ -18,7 +18,7 @@
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
 	<baseDir></baseDir>
-	<baseURL>/MyShop/resources/page/img</baseURL>
+	<baseURL>/MyShop/src/main/webapp/resources/page/img</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>
 	<!--

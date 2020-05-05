@@ -44,11 +44,11 @@ public class CategoryDAO {
 	// getall
 	public List<Category> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Category").list();
+		return session.createQuery("FROM Category", Category.class).getResultList();
 	}
 	
 	public Category findById(final int categoryId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return (Category) session.createQuery("FROM Category WHERE categoryId =: categoryId").setInteger("categoryId", categoryId);
+		return session.get(Category.class, categoryId);
 	}
 }

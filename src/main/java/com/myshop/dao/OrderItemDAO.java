@@ -34,12 +34,12 @@ public class OrderItemDAO {
     
     public OrderItem findById(final int orderItemId) {
     	Session session = this.sessionFactory.getCurrentSession();
-		return (OrderItem) session.createQuery("FROM OrderItem WHERE orderItemId =:orderItemId").setInteger("orderItemIa", orderItemId);
+		return session.get(OrderItem.class, orderItemId);
     }
     
     public List<OrderItem> getListByOrderId(Integer orderId){
     	Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM OrderItem WHERE orderId = :orderId").setParameter("orderId", orderId).list();
+		return session.createQuery("FROM OrderItem WHERE orderId = :orderId", OrderItem.class).setParameter("orderId", orderId).getResultList();
     }
    
 }

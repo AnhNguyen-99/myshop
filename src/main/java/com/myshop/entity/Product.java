@@ -54,7 +54,9 @@ public class Product {
 	@Column(name = "createDate")
 	private Date createDate;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoryId", nullable = false)
 	private Category categoryId;
 	

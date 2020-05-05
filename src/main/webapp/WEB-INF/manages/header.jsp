@@ -105,7 +105,7 @@
 	<div class="header-main">
 		<div class="header-left">
 			<div class="logo-name">
-				<a href="index.htm">
+				<a href="#">
 					<h1>Karma</h1> <!--<img id="logo" src="" alt="Logo"/>-->
 				</a>
 			</div>

@@ -75,10 +75,7 @@ public class ProductDAO {
 	
 	public List<Product> getListNav(Integer offset, Integer maxResult){
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product ORDER BY createDate DESC").setFirstResult(offset == null?0:offset).setMaxResults(maxResult == null?3:maxResult).list();
-//		query.setFirstResult();
-//        query.setMaxResults();
-//        List<Product> list = query.getResultList();
+		List<Product> list = session.createQuery("FROM Product ORDER BY createDate DESC", Product.class).setFirstResult(offset == null?0:offset).setMaxResults(maxResult == null?3:maxResult).getResultList();
         return list;
 	}
 	
@@ -89,7 +86,7 @@ public class ProductDAO {
 	
 	public List<Product> getListByCategoryAndLimit(Integer categoryId, Integer offset, Integer maxResalt){
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId").setParameter("categoryId", categoryId).setFirstResult(offset == null?0:offset).setMaxResults(maxResalt == null?6:maxResalt).list();
+		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).setFirstResult(offset == null?0:offset).setMaxResults(maxResalt == null?6:maxResalt).list();
 		return list;
 	}
 	
@@ -99,13 +96,13 @@ public class ProductDAO {
 	}
 	public int totalProductByCategoryId(Integer categoryId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId").setParameter("categoryId", categoryId).list();
+		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).getResultList();
 		return list.size();
 	}
 	
 	public List<Product> getListByProductName(String productName){
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE productName LIKE :productName").setString("productName", productName).list();
+		List<Product> list = session.createQuery("FROM Product WHERE productName LIKE :productName", Product.class).setParameter("productName", productName).getResultList();
 		return list;
 	}
 }

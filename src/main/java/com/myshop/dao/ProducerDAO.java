@@ -52,12 +52,12 @@ public class ProducerDAO {
 	
 	public Producer findById(int producerId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return (Producer) session.createQuery("FROM Producer WHERE producerId =:producerId").setInteger("producerId", producerId);
+		return session.get(Producer.class, producerId);
 	}
 	
 	public List<Producer>getAll(){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Producer").list();
+		return session.createQuery("FROM Producer", Producer.class).getResultList();
 	}
 	
 }

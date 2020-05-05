@@ -51,12 +51,6 @@ public class ControllerProducer {
 		return "manages/producer_form";
 	}
 
-//	@RequestMapping(value = "/edit/{producerId}", method = RequestMethod.GET)
-//	public String viewEditProducer(@PathVariable("producerId") int producerId, Model model) {
-//		Producer producer = producerService.findById(producerId);
-//		model.addAttribute("producer", producer);
-//		return "manages/producer_form";
-//	}
 
 	@RequestMapping(value = "/remove/{producerId}", method = RequestMethod.GET)
 	public String viewRemoveProducer(@PathVariable("producerId") int producerId, Model model) {
@@ -64,10 +58,10 @@ public class ControllerProducer {
 		boolean bl = producerService.delete(producer);
 		if (bl) {
 			model.addAttribute("listProducer", producerService.getAll());
-			model.addAttribute("status", "X贸a th脿nh c么ng!");
+			model.addAttribute("status", "X骯 th鄋h c鬾g!");
 			return "manages/producer_list";
 		} else {
-			model.addAttribute("status", "X贸a kh么ng th脿nh c么ng!");
+			model.addAttribute("status", "X骯 kh鬾g th鄋h c鬾g!");
 			model.addAttribute("listProducer", producerService.getAll());
 			return "manages/producer_list";
 		}

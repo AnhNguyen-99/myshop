@@ -155,7 +155,7 @@ public class ControllerPage {
         return "page/category";
     }
     
-    // Sáº£n pháº©m theo danh má»¥c
+    // Sản phẩm theo danh mục 
     @RequestMapping(value = "/findByCategoryId/{categoryId}",method = RequestMethod.GET)
     public String viewFind(@PathVariable("categoryId") int categoryId,Integer offset, Integer maxResult ,Model model){
 //        model.addAttribute("listProduct", productService.getListByCategoryAndLimit(categoryId, offset, maxResult));

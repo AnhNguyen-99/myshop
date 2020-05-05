@@ -44,10 +44,10 @@
                             <div class="clearfix"> </div>     
                         </div>
                     </div>
-                    <!-- <script type="text/javascript">
+                    <script type="text/javascript">
                         var editor = CKEDITOR.replace('content1');
                         CKFinder.setupCKEditor(editor, 'resources/ckfinder/');
-                    </script> -->
+                    </script>
                     <jsp:include page="footer.jsp"></jsp:include>
                     </div>
                 </div>

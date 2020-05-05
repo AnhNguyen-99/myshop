@@ -2,7 +2,6 @@ package com.myshop.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,7 @@ public class AccountDAO {
 	
 	public List<Account> getAll(){
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Account");
-		List<Account> list = query.list();
-		return list;
+		return session.createQuery("FROM Account", Account.class).getResultList();
 	}
 	
 	public boolean create(Account obj) {
@@ -67,7 +64,7 @@ public class AccountDAO {
 	public boolean checkName(String name) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			List<Account> list = session.createQuery("FROM Account WHERE UPPER(accountName) LIKE :accountName").setParameter("accountName", name.toUpperCase()).list();
+			List<Account> list = session.createQuery("FROM Account WHERE UPPER(accountName) LIKE :accountName", Account.class).setParameter("accountName", name.toUpperCase()).getResultList();
 			if(list.size() > 0)
 				return true;
 			else
