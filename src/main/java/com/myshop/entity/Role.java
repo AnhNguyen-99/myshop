@@ -1,65 +1,81 @@
 package com.myshop.entity;
 
-import java.util.Collection;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "role", catalog = "myshop_1")
+public class Role implements java.io.Serializable {
 
-	@Id
-	@Column(name = "roleId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int roleId;
+	private static final long serialVersionUID = -4328995011502431496L;
 	
-	@Column(name = "roleName")
+	private Integer roleId;
 	private String roleName;
-	
-	@Column(name = "createDate")
 	private Date createDate;
-	
-	@OneToMany(mappedBy = "roleId")
-	public Collection<Account> account;
+	private Set<Account> accounts = new HashSet<Account>(0);
 
-	public int getRoleId() {
-		return roleId;
+	public Role() {
 	}
 
-	public void setRoleId(int roleId) {
+	public Role(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public Role(String roleName, Date createDate, Set<Account> accounts) {
+		this.roleName = roleName;
+		this.createDate = createDate;
+		this.accounts = accounts;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "roleId", unique = true, nullable = false)
+	public Integer getRoleId() {
+		return this.roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
+	@Column(name = "roleName", nullable = false, length = 20)
 	public String getRoleName() {
-		return roleName;
+		return this.roleName;
 	}
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createDate", length = 26)
 	public Date getCreateDate() {
-		return createDate;
+		return this.createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public Collection<Account> getAccount() {
-		return account;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
+	public Set<Account> getAccounts() {
+		return this.accounts;
 	}
 
-	public void setAccount(Collection<Account> account) {
-		this.account = account;
+	public void setAccounts(Set<Account> accounts) {
+		this.accounts = accounts;
 	}
 
-	
 }

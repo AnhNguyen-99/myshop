@@ -43,4 +43,9 @@ public class OrderService {
     public int totalItem() {
     	return orderDAO.totalItem();
     }
+    
+    public List<Order> getListNav(Integer offset, Integer maxResult){
+    	return orderDAO.getListNav(offset, maxResult);
+    }
+    
 }

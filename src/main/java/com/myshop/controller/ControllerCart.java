@@ -63,7 +63,7 @@ public class ControllerCart {
         return "page/cart";
 	}
 	
-	private int totalPrice(HashMap<Integer, Cart> cartItems) {
+	private Float totalPrice(HashMap<Integer, Cart> cartItems) {
         int count = 0;
         for (Map.Entry<Integer, Cart> list : cartItems.entrySet()) {
 //            if(list.getValue().getProductSize().getProductId().getProductSale() == 0){
@@ -72,7 +72,7 @@ public class ControllerCart {
 //                count += (list.getValue().getProductSize().getProductId().getProductPrice() - (list.getValue().getProductSize().getProductId().getProductPrice() * (100 - list.getValue().getProductSize().getProductId().getProductSale())/100) ) * list.getValue().getQuantity();
 //            }
         }
-        return count;
+        return (float) count;
     }
 	
 	// Remove
@@ -99,7 +99,7 @@ public class ControllerCart {
             cartItems = new HashMap<>();
         }
         Account account = (Account) session.getAttribute("myLogin");
-        order.setAccountId(account);
+        order.setAccount(account);
         Calendar c = Calendar.getInstance();
         order.setOrderDate(c.getTime());
         order.setTotalPrice(totalPrice(cartItems));
@@ -109,8 +109,8 @@ public class ControllerCart {
         System.out.println(order);
         for (Map.Entry<Integer, Cart> entry : cartItems.entrySet()) {
             OrderItem orderItem = new OrderItem();
-            orderItem.setOrderId(order);
-            orderItem.setProductId(entry.getValue().getProduct());
+            orderItem.setOrders(order);
+            orderItem.setProduct(entry.getValue().getProduct());
             orderItem.setOrderItemPrice(entry.getValue().getProduct().getProductPrice() * entry.getValue().getQuantity());
             orderItem.setOrderItemQuantity(entry.getValue().getQuantity());
             orderItem.setOrderItemStatus(true);

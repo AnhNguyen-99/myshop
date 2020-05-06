@@ -15,7 +15,6 @@
 		</div>
 		<div class="menu">
 			<ul id="menu">
-				<!--<li><a href="${pageContext.request.contextPath}/manages/home.htm"><i class="fa fa-home"></i><span>Trang chủ</span></a></li>-->
 				<li><a href="${pageContext.request.contextPath}/manages/category/list"><i class="fa fa-tags"></i><span>Danh mục</span></a></li>
 				<li><a href="${pageContext.request.contextPath}/manages/producer/list"><i class="fa fa-bank"></i><span>Nhà sản xuất</span></a></li>
 				<li><a href="${pageContext.request.contextPath}/manages/product/list"><i class="fa fa-bars"></i><span>Sản phẩm</span></a></li>

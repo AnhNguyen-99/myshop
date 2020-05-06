@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="mytag" uri="/WEB-INF/taglibs/newtag_library.tld" %>
 <html lang="zxx" class="no-js">
     <head>
         <title>Karma Shop</title>
@@ -47,7 +48,7 @@
                             <div class="head">Nhà sản xuất</div>
                             <ul class="main-categories">
                                 <c:forEach items="${listProducer}" var="item">
-                                    <li class="main-nav-list"><a href="${pageContext.request.contextPath}/producer/${item.producerId}.htm" aria-expanded="false" >
+                                    <li class="main-nav-list"><a href="${pageContext.request.contextPath}/producer/${item.producerId}" aria-expanded="false" >
                                             <span class="lnr lnr-arrow-right"></span>${item.producerName}</a>
                                     </li>
                                 </c:forEach>
@@ -57,7 +58,7 @@
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <!-- Start Filter Bar -->
                         <div class="filter-bar d-flex flex-wrap align-items-center">
-                            <mytag:PaginationTagHander count = "${count}" steps="${maxResult}" offset="${offset}" uri="${pageContext.request.contextPath}/shop.htm" next="&raquo;" previous="&laquo;"/>
+                            <mytag:PaginationTagHander count = "${count}" steps="${maxResult}" offset="${offset}" uri="${pageContext.request.contextPath}/shop" next="&raquo;" previous="&laquo;"/>
                         </div>
                         <section class="lattest-product-area pb-40 category-list">
                             <div class="row">

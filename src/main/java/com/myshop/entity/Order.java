@@ -1,151 +1,152 @@
 package com.myshop.entity;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "orders")
-public class Order {
+@Table(name = "orders", catalog = "myshop_1")
+public class Order implements java.io.Serializable {
 
-	@Id
-	@Column(name = "orderId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static final long serialVersionUID = -2485986699975338265L;
+	
 	private Integer orderId;
-
-	@Column(name = "orderName")
+	private Account account;
 	private String orderName;
-
-	@Column(name = "mail")
 	private String mail;
-
-	@Column(name = "mobile")
 	private String mobile;
-
-	@Column(name = "address")
 	private String address;
-
-	@Column(name = "totalPrice")
-	private float totalPrice;
-
-	@Column(name = "orderStatus")
+	private Float totalPrice;
 	private Boolean orderStatus;
-
-	@Column(name = "orderDate")
 	private Date orderDate;
-
-	@Column(name = "createDate")
 	private Date createDate;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "accountId")
-	private Account accountId;
-
-	@OneToMany(mappedBy = "orderId")
-	public Collection<OrderItem> orderItem;
+	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
 
 	public Order() {
 		Calendar c = Calendar.getInstance();
 		this.createDate = c.getTime();
 	}
-	
+
+	public Order(Account account) {
+		this.account = account;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "orderId", unique = true, nullable = false)
 	public Integer getOrderId() {
-		return orderId;
+		return this.orderId;
 	}
 
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "accountId", nullable = false)
+	public Account getAccount() {
+		return this.account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	@Column(name = "orderName")
 	public String getOrderName() {
-		return orderName;
+		return this.orderName;
 	}
 
 	public void setOrderName(String orderName) {
 		this.orderName = orderName;
 	}
 
+	@Column(name = "mail", length = 100)
 	public String getMail() {
-		return mail;
+		return this.mail;
 	}
 
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
 
+	@Column(name = "mobile", length = 20)
 	public String getMobile() {
-		return mobile;
+		return this.mobile;
 	}
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
+	@Column(name = "address")
 	public String getAddress() {
-		return address;
+		return this.address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public float getTotalPrice() {
-		return totalPrice;
+	@Column(name = "totalPrice", precision = 12, scale = 0)
+	public Float getTotalPrice() {
+		return this.totalPrice;
 	}
 
-	public void setTotalPrice(float totalPrice) {
+	public void setTotalPrice(Float totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
+	@Column(name = "orderStatus")
 	public Boolean getOrderStatus() {
-		return orderStatus;
+		return this.orderStatus;
 	}
 
 	public void setOrderStatus(Boolean orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "orderDate", length = 26)
 	public Date getOrderDate() {
-		return orderDate;
+		return this.orderDate;
 	}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createDate", length = 26)
 	public Date getCreateDate() {
-		return createDate;
+		return this.createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public Account getAccountId() {
-		return accountId;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+	public Set<OrderItem> getOrderitems() {
+		return this.orderItems;
 	}
 
-	public void setAccountId(Account accountId) {
-		this.accountId = accountId;
-	}
-
-	public Collection<OrderItem> getOrderItem() {
-		return orderItem;
-	}
-
-	public void setOrderItem(Collection<OrderItem> orderItem) {
-		this.orderItem = orderItem;
+	public void setOrderitems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 }

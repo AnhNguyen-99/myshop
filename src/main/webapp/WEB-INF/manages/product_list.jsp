@@ -52,7 +52,7 @@
 													<td class="hidden-xs" style="width: 200px">
 														${item.productName}</td>
 													<td class="hidden-xs" style="width: 150px;">
-														${item.categoryId.categoryName}
+														${item.category.categoryName}
 													</td> 
 													<td style="text-align: left; width: 100px;">
 														${item.productPrice} VNĐ</td>

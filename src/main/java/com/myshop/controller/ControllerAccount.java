@@ -35,7 +35,7 @@ public class ControllerAccount {
 	public String viewSave(@ModelAttribute("account") Account account, Model model) {
 		Role role = new Role();
         role.setRoleId(1);
-        account.setRoleId(role);
+        account.setRole(role);
         boolean bl = accountService.create(account);
         if(bl) {
         	return "redirect:list";

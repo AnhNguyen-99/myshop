@@ -68,12 +68,13 @@ public class ControllerPage {
 		if(account == null) {
 			return "redirect:login";
 		}else {
-			if(account.getRoleId().getRoleId() == 1)
+			if(account.getRole().getRoleId() == 1)
 				return "redirect:manages/home";
 			else
 				return "redirect:home";
 		}
 	}
+	
 	// Trang home admin
 	@RequestMapping(value = "/manages/home")
 	public String viewHomeManages(Model model) {
@@ -91,7 +92,6 @@ public class ControllerPage {
 		return "page/index";
 	}
 	
-	//
 	private void shopMyCart(HttpSession session) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
@@ -106,7 +106,7 @@ public class ControllerPage {
         session.setAttribute("myCartNum", cartItems.size());
     }
 	
-	// Táº¡o tÃ i khoáº£n
+	// Tạo tài khoản
     @RequestMapping(value = "/regist", method = RequestMethod.GET)
     public String viewInitRegist(Model model){
         model.addAttribute("account", new Account());
@@ -117,13 +117,13 @@ public class ControllerPage {
     public String viewRegist(@ModelAttribute()Account account, Model model, HttpSession session){
         Role role = new Role();
         role.setRoleId(2);
-        account.setRoleId(role);
+        account.setRole(role);
         boolean bl = accountService.create(account);
         if(bl){
             session.setAttribute("myLogin", account);
             return "redirect:home.htm";
         }else{
-            model.addAttribute("status", "Táº¡o tÃ i khoáº£n khÃ´ng thÃ nh cÃ´ng !!!");
+            model.addAttribute("status", "Tạo tài khoản không thành công!!!");
             return "page/regist";
         }
     }
@@ -135,9 +135,10 @@ public class ControllerPage {
         return "redirect:home";
     }
     
-    //Xem chi tiáº¿t sáº£n pháº©m
+    //Xem chi tiết sản phẩm
     @RequestMapping(value = "/detailProduct/{productId}", method = RequestMethod.GET)
-    public String viewDetail(@PathVariable("productId")Integer productId, Model model){
+    public String viewDetailProduct(@PathVariable("productId")Integer productId, Model model, HttpSession session){
+    	check_account(session);
         Product product = productService.findById(productId);
         model.addAttribute("product", product);
         return "page/single-product";
@@ -145,7 +146,8 @@ public class ControllerPage {
     
     // Shop
     @RequestMapping(value = "/shop", method = RequestMethod.GET)
-    public String viewShop(Model model, Integer offset, Integer maxResult){
+    public String viewShop(Model model, Integer offset, Integer maxResult, HttpSession session){
+    	check_account(session);
         model.addAttribute("listProduct", productService.getListNav(offset, maxResult));
         model.addAttribute("offset", offset == null ? 0 : offset);
         model.addAttribute("maxResult", maxResult == null ? 6 : maxResult);
@@ -157,37 +159,39 @@ public class ControllerPage {
     
     // Sản phẩm theo danh mục 
     @RequestMapping(value = "/findByCategoryId/{categoryId}",method = RequestMethod.GET)
-    public String viewFind(@PathVariable("categoryId") int categoryId,Integer offset, Integer maxResult ,Model model){
-//        model.addAttribute("listProduct", productService.getListByCategoryAndLimit(categoryId, offset, maxResult));
-//        model.addAttribute("offset", offset == null ? 0 : offset);
-//        model.addAttribute("maxResult", maxResult == null ? 6 : maxResult);
-//        model.addAttribute("count", productService.totalProductByCategoryId(categoryId));
-    	model.addAttribute("listProduct", productService.getListByCategoryId(categoryId));
+    public String viewFind(@PathVariable("categoryId") int categoryId,Integer offset, Integer maxResult ,Model model, HttpSession session){
+    	check_account(session);
+        model.addAttribute("listProduct", productService.getListByCategoryAndLimit(categoryId, offset, maxResult));
+        model.addAttribute("offset", offset == null ? 0 : offset);
+        model.addAttribute("maxResult", maxResult == null ? 6 : maxResult);
+        model.addAttribute("count", productService.totalProductByCategoryId(categoryId));
         model.addAttribute("listCategory", categoryService.findAll());
         model.addAttribute("listProducer", producerService.getAll());
         return "page/category";
     }
     
-    // List danh sÃƒÂ¡ch sÃ¡ÂºÂ£n phÃ¡ÂºÂ©m theo producerId
-//    @RequestMapping(value = "/producer/{producerId}", method = RequestMethod.GET)
-//    public String viewProducer(@PathVariable("producerId") int producerId, Model model, Integer offset, Integer maxResult) {
-//        model.addAttribute("listProduct", productService.getListByProducerAndLimit(producerId, offset, maxResult));
-//        model.addAttribute("offset", offset == null ? 0 : offset);
-//        model.addAttribute("maxResult", maxResult == null ? 6 : maxResult);
-//        model.addAttribute("count", productService.totalProductByProducerId(producerId));
-//        model.addAttribute("listCategory", categoryService.getAll());
-//        model.addAttribute("listProducer", producerService.getAll());
-//        return "page/category";
-//    }
-//    
-    // TÃ¬m kiáº¿m
+    // List danh sách sản phẩnm theo nsx
+    @RequestMapping(value = "/producer/{producerId}", method = RequestMethod.GET)
+    public String viewProducer(@PathVariable("producerId") int producerId, Model model, Integer offset, Integer maxResult, HttpSession session) {
+    	check_account(session);
+        model.addAttribute("listProduct", productService.getListByProducerAndLimit(producerId, offset, maxResult));
+        model.addAttribute("offset", offset == null ? 0 : offset);
+        model.addAttribute("maxResult", maxResult == null ? 6 : maxResult);
+        model.addAttribute("count", productService.totalProductByProducerId(producerId));
+        model.addAttribute("listCategory", categoryService.findAll());
+        model.addAttribute("listProducer", producerService.getAll());
+        return "page/category";
+    }
+    
+    // Tìm kiếm
     @RequestMapping(value = "/search",method = RequestMethod.GET)
-    public String viewSeach(@RequestParam("query")String productName,Model model){
+    public String viewSeach(@RequestParam("query")String productName,Model model, HttpSession session){
+    	check_account(session);
         List<Product> list = productService.getListByProductName(productName);
         if(list != null)
             model.addAttribute("listProduct", list);
         else{
-            String status = "KhÃ´ng cÃ³ sáº£n pháº©m mÃ  báº¡n muá»‘n tÃ¬m!!!";
+            String status = "Không có sản phẩm tìm kiếm!!!";
             System.out.println(status);
             model.addAttribute("status", status);
         }
@@ -205,7 +209,7 @@ public class ControllerPage {
             return "redirect:login";
         }else{
             Order order = new Order();
-            order.setAccountId(account);
+            order.setAccount(account);
             order.setOrderName(account.getAccountName());
             order.setAddress(account.getAddress());
             order.setMobile(account.getMoblie());
@@ -231,13 +235,16 @@ public class ControllerPage {
     
     // Blog
     @RequestMapping(value = "/blog", method = RequestMethod.GET)
-    public String viewBlog(Model model){
+    public String viewBlog(Model model, HttpSession session){
+    	check_account(session);
         model.addAttribute("listNews", newsService.getAll());
         return "page/blog";
     }
+    
     // Chi tiết về tin tức
     @RequestMapping(value = "/detailBlog/{newsId}", method = RequestMethod.GET)
     public String viewDetail(@PathVariable("newsId")Integer newsId, Model model, HttpSession session){
+    	check_account(session);
     	model.addAttribute("news", newsService.findById(newsId));
         return "page/single-blog";
     }

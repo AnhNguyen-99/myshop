@@ -1,196 +1,177 @@
 package com.myshop.entity;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "product", catalog = "myshop_1")
+public class Product implements java.io.Serializable {
 
-	@Id
-	@Column(name = "productId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static final long serialVersionUID = 1334218165006061223L;
+
 	private Integer productId;
-	
-	@Column(name = "productName")
+	private Category category;
+	private Producer producer;
 	private String productName;
-	
-	@Column(name = "productImage")
 	private String productImage;
-	
-	@Column(name = "productImage2")
 	private String productImage2;
-	
-	@Column(name = "productImage3")
 	private String productImage3;
-	
-	@Column(name = "productPrice")
-	private Double productPrice;
-	
-	@Column(name = "productSale")
+	private float productPrice;
 	private int productSale;
-	
-	@Column(name = "unit")
 	private String unit;
-	
-	@Column(name = "shortdescription")
 	private String shortdescription;
-	
-	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "createDate")
 	private Date createDate;
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoryId", nullable = false)
-	private Category categoryId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "producerId", referencedColumnName = "producerId")
-	private Producer producerId;
-	
-	@OneToMany(mappedBy = "productId")
-	public Collection<OrderItem> orderItem;
+	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
 
 	public Product() {
 		Calendar c = Calendar.getInstance();
 		this.createDate = c.getTime();
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "productId", unique = true, nullable = false)
 	public Integer getProductId() {
-		return productId;
+		return this.productId;
 	}
 
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "categoryId", nullable = false)
+	public Category getCategory() {
+		return this.category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "producerId", nullable = false)
+	public Producer getProducer() {
+		return this.producer;
+	}
+
+	public void setProducer(Producer producer) {
+		this.producer = producer;
+	}
+
+	@Column(name = "productName", nullable = false)
 	public String getProductName() {
-		return productName;
+		return this.productName;
 	}
 
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
+	@Column(name = "productImage", nullable = false)
 	public String getProductImage() {
-		return productImage;
+		return this.productImage;
 	}
 
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
 
+	@Column(name = "productImage2", nullable = false)
 	public String getProductImage2() {
-		return productImage2;
+		return this.productImage2;
 	}
 
 	public void setProductImage2(String productImage2) {
 		this.productImage2 = productImage2;
 	}
 
+	@Column(name = "productImage3", nullable = false)
 	public String getProductImage3() {
-		return productImage3;
+		return this.productImage3;
 	}
 
 	public void setProductImage3(String productImage3) {
 		this.productImage3 = productImage3;
 	}
 
-	public Double getProductPrice() {
-		return productPrice;
+	@Column(name = "productPrice", nullable = false, precision = 12, scale = 0)
+	public float getProductPrice() {
+		return this.productPrice;
 	}
 
-	public void setProductPrice(Double productPrice) {
+	public void setProductPrice(float productPrice) {
 		this.productPrice = productPrice;
 	}
 
+	@Column(name = "productSale", nullable = false)
 	public int getProductSale() {
-		return productSale;
+		return this.productSale;
 	}
 
 	public void setProductSale(int productSale) {
 		this.productSale = productSale;
 	}
 
+	@Column(name = "unit", length = 20)
 	public String getUnit() {
-		return unit;
+		return this.unit;
 	}
 
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
 
+	@Column(name = "shortdescription")
 	public String getShortdescription() {
-		return shortdescription;
+		return this.shortdescription;
 	}
 
 	public void setShortdescription(String shortdescription) {
 		this.shortdescription = shortdescription;
 	}
 
+	@Column(name = "description", length = 65535)
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createDate", length = 26)
 	public Date getCreateDate() {
-		return createDate;
+		return this.createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public Category getCategoryId() {
-		return categoryId;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	public Set<OrderItem> getOrderitems() {
+		return this.orderItems;
 	}
 
-	public void setCategoryId(Category categoryId) {
-		this.categoryId = categoryId;
+	public void setOrderitems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
-	public Producer getProducerId() {
-		return producerId;
-	}
-
-	public void setProducerId(Producer producerId) {
-		this.producerId = producerId;
-	}
-
-	public Collection<OrderItem> getOrderItem() {
-		return orderItem;
-	}
-
-	public void setOrderItem(Collection<OrderItem> orderItem) {
-		this.orderItem = orderItem;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", productImage=" + productImage
-				+ ", productImage2=" + productImage2 + ", productImage3=" + productImage3 + ", productPrice="
-				+ productPrice + ", productSale=" + productSale + ", unit=" + unit + ", shortdescription="
-				+ shortdescription + ", description=" + description + ", createDate=" + createDate + ", categoryId="
-				+ categoryId + ", producerId=" + producerId + ", orderItem=" + orderItem + "]";
-	}
-	
 }

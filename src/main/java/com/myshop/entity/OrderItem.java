@@ -2,111 +2,105 @@ package com.myshop.entity;
 
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "orderItem")
-public class OrderItem {
+@Table(name = "orderitem", catalog = "myshop_1")
+public class OrderItem implements java.io.Serializable {
 
-	@Id
-	@Column(name = "orderItemId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int orderItemId;
+	private static final long serialVersionUID = -4187741387229353122L;
 	
-	@Column(name = "orderItemQuantity")
-	private int orderItemQuantity;
-	
-	@Column(name = "orderItemPrice")
-	private Double orderItemPrice;
-	
-	@Column(name = "orderItemStatus")
+	private Integer orderItemId;
+	private Order order;
+	private Product product;
+	private Integer orderItemQuantity;
+	private Float orderItemPrice;
 	private Boolean orderItemStatus;
-		
-	@Column(name = "createDate")
 	private Date createDate;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "orderId")
-	private Order orderId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "productId")
-	private Product productId;
 
 	public OrderItem() {
 		Calendar c = Calendar.getInstance();
 		this.createDate = c.getTime();
 	}
-	public int getOrderItemId() {
-		return orderItemId;
+
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "orderItemId", unique = true, nullable = false)
+	public Integer getOrderItemId() {
+		return this.orderItemId;
 	}
 
-	public void setOrderItemId(int orderItemId) {
+	public void setOrderItemId(Integer orderItemId) {
 		this.orderItemId = orderItemId;
 	}
 
-	public int getOrderItemQuantity() {
-		return orderItemQuantity;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "orderId", nullable = false)
+	public Order getOrders() {
+		return this.order;
 	}
 
-	public void setOrderItemQuantity(int orderItemQuantity) {
+	public void setOrders(Order order) {
+		this.order = order;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "productId", nullable = false)
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	@Column(name = "orderItemQuantity")
+	public Integer getOrderItemQuantity() {
+		return this.orderItemQuantity;
+	}
+
+	public void setOrderItemQuantity(Integer orderItemQuantity) {
 		this.orderItemQuantity = orderItemQuantity;
 	}
 
-	public Double getOrderItemPrice() {
-		return orderItemPrice;
+	@Column(name = "orderItemPrice", precision = 12, scale = 0)
+	public Float getOrderItemPrice() {
+		return this.orderItemPrice;
 	}
 
-	public void setOrderItemPrice(Double orderItemPrice) {
+	public void setOrderItemPrice(Float orderItemPrice) {
 		this.orderItemPrice = orderItemPrice;
 	}
 
+	@Column(name = "orderItemStatus")
 	public Boolean getOrderItemStatus() {
-		return orderItemStatus;
+		return this.orderItemStatus;
 	}
 
 	public void setOrderItemStatus(Boolean orderItemStatus) {
 		this.orderItemStatus = orderItemStatus;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createDate", length = 26)
 	public Date getCreateDate() {
-		return createDate;
+		return this.createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public Order getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Order orderId) {
-		this.orderId = orderId;
-	}
-
-	public Product getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Product productId) {
-		this.productId = productId;
-	}
-	@Override
-	public String toString() {
-		return "OrderItem [orderItemId=" + orderItemId + ", orderItemQuantity=" + orderItemQuantity
-				+ ", orderItemPrice=" + orderItemPrice + ", orderItemStatus=" + orderItemStatus + ", createDate="
-				+ createDate + ", orderId=" + orderId + ", productId=" + productId + "]";
-	}
-	
-	
 }

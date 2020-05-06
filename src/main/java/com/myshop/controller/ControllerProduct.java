@@ -48,7 +48,6 @@ public class ControllerProduct {
         model.addAttribute("offset", offset == null ? 0 : offset);
         model.addAttribute("maxResult", maxResult == null ? 3 : maxResult);
         model.addAttribute("count", productService.totalItem());
-		model.addAttribute("listProduct", productService.getAll());
 		return "manages/product_list";
 	}
 
@@ -84,14 +83,14 @@ public class ControllerProduct {
 							product.setProductId(Integer.parseInt(value));
 					} else if (name.equals("categoryId.categoryId")) {
 						Category c = new Category(Integer.parseInt(value));
-						product.setCategoryId(c);
+						product.setCategory(c);
 					} else if (name.equals("producerId.producerId")) {
 						Producer producer = new Producer(Integer.parseInt(value));
-						product.setProducerId(producer);
+						product.setProducer(producer);
 					} else if (name.equals("productName")) {
 						product.setProductName(new String(value.getBytes("iso-8859-1"), "UTF-8"));
 					} else if (name.equals("productPrice")) {
-						product.setProductPrice(Double.parseDouble(value));
+						product.setProductPrice(Float.parseFloat(value));
 					} else if (name.equals("productSale")) {
 						product.setProductSale(Integer.parseInt(value));
 					} else if (name.equals("unit")) {

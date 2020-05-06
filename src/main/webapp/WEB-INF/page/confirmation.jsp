@@ -50,14 +50,14 @@
                                 <c:forEach items="${listOrderItem}" var="item">
                                     <tr>
                                         <td>
-                                            <p>${item.productId.productName}</p>
+                                            <p>${item.product.productName}</p>
                                         </td>
                                         
                                         <td>
                                             <h5>${item.orderItemQuantity}</h5>
                                         </td>
                                         <td>
-                                            <p>${item.productId.productPrice}</p>
+                                            <p>${item.product.productPrice}</p>
                                         </td>
                                         <td>
                                             <p>${item.orderItemPrice}VNĐ</p>

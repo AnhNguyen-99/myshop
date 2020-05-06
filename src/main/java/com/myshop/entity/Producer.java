@@ -1,76 +1,77 @@
 package com.myshop.entity;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "producer")
-public class Producer {
+@Table(name = "producer", catalog = "myshop_1")
+public class Producer implements java.io.Serializable {
 
-	@Id
-	@Column(name = "producerId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static final long serialVersionUID = -4090426484322743894L;
+
 	private Integer producerId;
-	
-	@Column(name = "producerName")
 	private String producerName;
-	
-	@Column(name = "createDate")
 	private Date createDate;
-	
-	@OneToMany(mappedBy = "producerId", targetEntity = Producer.class)
-	public Collection<Product> product;
+	private Set<Product> products = new HashSet<Product>(0);
 
 	public Producer() {
 		Calendar c = Calendar.getInstance();
 		this.createDate = c.getTime();
 	}
-	
-	
+
 	public Producer(Integer producerId) {
 		this.producerId = producerId;
 	}
-
-
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "producerId", unique = true, nullable = false)
 	public Integer getProducerId() {
-		return producerId;
+		return this.producerId;
 	}
 
 	public void setProducerId(Integer producerId) {
 		this.producerId = producerId;
 	}
 
+	@Column(name = "producerName", length = 100)
 	public String getProducerName() {
-		return producerName;
+		return this.producerName;
 	}
 
 	public void setProducerName(String producerName) {
 		this.producerName = producerName;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createDate", length = 26)
 	public Date getCreateDate() {
-		return createDate;
+		return this.createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public Collection<Product> getProduct() {
-		return product;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producer")
+	public Set<Product> getProducts() {
+		return this.products;
 	}
 
-	public void setProduct(Collection<Product> product) {
-		this.product = product;
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
-	
+
 }

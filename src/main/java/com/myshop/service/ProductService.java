@@ -68,4 +68,12 @@ public class ProductService {
 		return productDAO.getListByCategoryId(categoryId);
 	}
 	
+	public List<Product> getListByProducerAndLimit(Integer producerId, Integer offset, Integer maxResult){
+		return productDAO.getListByProducerAndLimit(producerId, offset, maxResult);
+	}
+	
+	public int totalProductByProducerId(Integer producerId) {
+		return productDAO.totalProductByProducerId(producerId);
+	}
+	
 }
