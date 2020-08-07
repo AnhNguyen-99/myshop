@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,42 +15,31 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "role", catalog = "myshop_1")
+@Table(name = "role", catalog = "myshop")
 public class Role implements java.io.Serializable {
 
-	private static final long serialVersionUID = -4328995011502431496L;
+	private static final long serialVersionUID = -6185533053115667720L;
 	
-	private Integer roleId;
+	private int roleId;
 	private String roleName;
 	private Date createDate;
-	private Set<Account> accounts = new HashSet<Account>(0);
+	private Set<AccountRole> accountRoles = new HashSet<AccountRole>(0);
 
 	public Role() {
 	}
 
-	public Role(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public Role(String roleName, Date createDate, Set<Account> accounts) {
-		this.roleName = roleName;
-		this.createDate = createDate;
-		this.accounts = accounts;
-	}
-
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "roleId", unique = true, nullable = false)
-	public Integer getRoleId() {
+	public int getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(Integer roleId) {
+	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
 
-	@Column(name = "roleName", nullable = false, length = 20)
+	@Column(name = "roleName", nullable = false, length = 50)
 	public String getRoleName() {
 		return this.roleName;
 	}
@@ -70,12 +59,12 @@ public class Role implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set<Account> getAccounts() {
-		return this.accounts;
+	public Set<AccountRole> getAccountRoles() {
+		return this.accountRoles;
 	}
 
-	public void setAccounts(Set<Account> accounts) {
-		this.accounts = accounts;
+	public void setAccountRoles(Set<AccountRole> accountRoles) {
+		this.accountRoles = accountRoles;
 	}
 
 }

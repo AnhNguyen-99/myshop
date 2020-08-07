@@ -8,51 +8,74 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "producer", catalog = "myshop_1")
+@Table(name = "producer", catalog = "myshop")
 public class Producer implements java.io.Serializable {
 
-	private static final long serialVersionUID = -4090426484322743894L;
-
-	private Integer producerId;
+	private static final long serialVersionUID = 7487617247133767680L;
+	
+	private int producerId;
+	private Account account;
 	private String producerName;
+	private Boolean producerStatus;
 	private Date createDate;
 	private Set<Product> products = new HashSet<Product>(0);
 
 	public Producer() {
-		Calendar c = Calendar.getInstance();
-		this.createDate = c.getTime();
+		Calendar calendar = Calendar.getInstance();
+		this.createDate = calendar.getTime();
 	}
 
-	public Producer(Integer producerId) {
+	public Producer(int producerId) {
 		this.producerId = producerId;
 	}
 	
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "producerId", unique = true, nullable = false)
-	public Integer getProducerId() {
+	public int getProducerId() {
 		return this.producerId;
 	}
 
-	public void setProducerId(Integer producerId) {
+	public void setProducerId(int producerId) {
 		this.producerId = producerId;
 	}
 
-	@Column(name = "producerName", length = 100)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "accountId", nullable = false)
+	public Account getAccount() {
+		return this.account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	@Column(name = "producerName", nullable = false, length = 100)
 	public String getProducerName() {
 		return this.producerName;
 	}
 
 	public void setProducerName(String producerName) {
 		this.producerName = producerName;
+	}
+
+	@Column(name = "producerStatus")
+	public Boolean getProducerStatus() {
+		return this.producerStatus;
+	}
+
+	public void setProducerStatus(Boolean producerStatus) {
+		this.producerStatus = producerStatus;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

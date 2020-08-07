@@ -1,2 +1,12 @@
 eclipse.preferences.version=1
-encoding//src/main/java/com/myshop/controller/ControllerPage.java=UTF-8
+encoding//src/main/java/com/myshop/api/CategoryAPI.java=UTF-8
+encoding//src/main/java/com/myshop/controller/ControllerAccount.java=UTF-8
+encoding//src/main/java/com/myshop/controller/ControllerCategory.java=UTF-8
+encoding//src/main/java/com/myshop/controller/ControllerFeedBack.java=UTF-8
+encoding//src/main/webapp/WEB-INF/manages/accountManages_form.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/manages/feedback_list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/manages/orderItem_list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/page/about.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/page/contact.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/page/product_detail.jsp=UTF-8
+encoding//src/main/webapp/index.jsp=UTF-8

@@ -1,181 +1,239 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Cart</title>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/page/img/fav.png">
-<link rel="stylesheet"	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-	<!-- Start Header Area -->
-	<jsp:include page="header.jsp"></jsp:include>
-	<!-- End Header Area -->
 
-	<!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
+	<div class="colorlib-loader"></div>
+
+	<jsp:include page="header.jsp"></jsp:include>
+
+	<div class="breadcrumbs">
 		<div class="container">
-			<div
-				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-				<div class="col-first">
-					<h1>Shopping Cart</h1>
-					<nav class="d-flex align-items-center">
-						<a href="${pageContext.request.contextPath}/home">Home<span
-							class="lnr lnr-arrow-right"></span></a> <a href="category.html">Cart</a>
-					</nav>
+			<div class="row">
+				<div class="col">
+					<p class="bread">
+						<span><a href="${pageContext.request.contextPath}/home">Home</a></span>
+						/ <span>Shopping Cart</span>
+					</p>
 				</div>
 			</div>
 		</div>
-	</section>
-	<!-- End Banner Area -->
+	</div>
 
-	<!--================Cart Area =================-->
-	<section class="cart_area">
+	<div class="colorlib-product">
 		<div class="container">
-			<div class="cart_inner">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sản phẩm</th>
-								<th scope="col">Số lượng</th>
-								<th scope="col">Giá</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<c:forEach items="${sessionScope.myCartItems}" var="map">
-								<tr>
-									<td>
-										<div class="media">
-											<div class="d-flex">
-												<img
-													src="${pageContext.request.contextPath}/resources/page/img/product/${map.value.product.productImage}"
-													alt="" width="50px" height="50px" />
-											</div>
-											<div class="media-body" style="width: 400px;">
-												<p>
-													<c:out value="${map.value.product.productName}"></c:out>
-												</p>
-											</div>
-										</div>
-									</td>
-
-									<td>
-										<div class="product_count">
-											<input type="number" value="${map.value.quantity}" min="1"
-												class="input-text qty" name="quantity" id="quantity"
-												data-toggle="modal"
-												data-target="#b${map.value.product.productId}">
-										</div>
-
-										<div class="modal fade"
-											id="b${map.value.product.productId}" tabindex="-1"
-											role="dialog" aria-labelledby="exampleModalCenterTitle"
-											aria-hidden="true">
-											<div class="modal-dialog modal-dialog-centered"
-												role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLongTitle">Notify</h5>
-														<button type="button" class="close" data-dismiss="modal"
-															aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<form
-														action="${pageContext.request.contextPath}/cart/updateCart/${map.value.product.productId}"
-														method="GET">
-														<div class="modal-body">
-															<input type="number" value="${map.value.quantity}"
-																min="1" class="input-text qty" name="quantity"
-																id="quantity">
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary"
-																data-dismiss="modal">Hủy</button>
-															 <%-- <span class="btn btn-primary">
-															 	 <a style="color: white" href="${pageContext.request.contextPath}/cart/updateCart/${map.value.product.productId}">Cập nhật</a>
-															</span> --%>
-															<button type="submit" class="btn-primary">Cập nhật</button>
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-									</td>
-
-									<td style="width: 300px;">
-										<h5>${map.value.product.productPrice * map.value.quantity}VNĐ</h5>
-									</td>
-									<td><a
-										href="${pageContext.request.contextPath}/cart/remove/${map.value.product.productId}"
-										class="ps-remove"></a> <%-- <button type="button" class="ps-remove" data-toggle="modal"
-											data-target="#a${map.value.productSize.productSizeId}"></button> --%>
-									</td>
-								</tr>
-
-							</c:forEach>
-
-							<tr>
-								<td></td>
-								<td></td>
-								<td>
-									<h5>Tổng tiền</h5>
-								</td>
-								<td>
-									<h5>${sessionScope.myCartTotal}VNĐ</h5>
-								</td>
-							</tr>
-
-							<tr class="out_button_area">
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-									<div class="checkout_btn_inner d-flex align-items-center">
-										<a class="gray_btn"
-											href="${pageContext.request.contextPath}/home.htm">Tiếp
-											tục mua</a> <a class="primary-btn"
-											href="${pageContext.request.contextPath}/checkout.htm">Tiến
-											hành thanh toán</a>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+			<div class="row row-pb-lg">
+				<div class="col-md-10 offset-md-1">
+					<div class="process-wrap">
+						<div class="process text-center active">
+							<p>
+								<span>01</span>
+							</p>
+							<h3>Shopping Cart</h3>
+						</div>
+						<div class="process text-center">
+							<p>
+								<span>02</span>
+							</p>
+							<h3>Checkout</h3>
+						</div>
+						<div class="process text-center">
+							<p>
+								<span>03</span>
+							</p>
+							<h3>Order Complete</h3>
+						</div>
+					</div>
 				</div>
-				<!-- 
-				<div class="modal fade" id="a" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">Notify</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
+			</div>
+
+			<div class="row row-pb-lg">
+				<div class="col-md-12">
+					<div class="product-name d-flex">
+						<div class="one-forth text-left px-4">
+							<span>Product Details</span>
+						</div>
+						<div class="one-eight text-center">
+							<span>Price</span>
+						</div>
+						<div class="one-eight text-center">
+							<span>Quantity</span>
+						</div>
+						<div class="one-eight text-center">
+							<span>Total</span>
+						</div>
+						<div class="one-eight text-center px-4">
+							<span>Remove</span>
+						</div>
+					</div>
+					<!-- List cart -->
+					<c:forEach items="${sessionScope.myCartItems}" var="map">
+						<div class="product-cart d-flex">
+							<div class="one-forth">
+								<%-- <div class="product-img"
+									style="background-image: url(${pageContext.request.contextPath}/resources/page/images/product/${map.value.productImage});"></div> --%>
+								<div class="product-img">
+									<img alt=""
+										src="${pageContext.request.contextPath}/resources/page/images/product/${map.value.product.productImage}"
+										width="90px" height="100px" />
+								</div>
+								<div class="display-tc">
+									<h3>
+										<c:out value="${map.value.product.producerName}"></c:out>
+									</h3>
+								</div>
 							</div>
-							<div class="modal-body">Are you sure delete it !</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Hủy</button>
-								<span class="btn btn-primary"> <a style="color: white"
-									href="${pageContext.request.contextPath}/cart/remove/${map.value.productSize.productSizeId}.htm">Xóa</a>
-								</span>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">$<c:out
+											value="${map.value.product.productPrice}"></c:out></span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<input type="text" id="quantity" name="quantity"
+										class="form-control input-number text-center"
+										value='<c:out value="${map.value.quantity}"></c:out>' min="1"
+										max="100">
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">$<c:out
+											value="${map.value.product.productPrice}"></c:out></span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<a href="${pageContext.request.contextPath}/cart/remove/${map.value.product.productId}" class="closed"></a>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+
+				</div>
+				
+			</div>
+			
+			<div class="row row-pb-lg">
+				<div class="col-md-12">
+					<div class="total-wrap">
+						<div class="row">
+							<div class="col-sm-8">
+								<form action="#">
+									<div class="row form-group">
+										<div class="col-sm-9">
+											<input type="text" name="quantity"
+												class="form-control input-number"
+												placeholder="Your Coupon Number...">
+										</div>
+										<div class="col-sm-3">
+											<input type="submit" value="Apply Coupon"
+												class="btn btn-primary">
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-sm-4 text-center">
+								<div class="total">
+									<div class="sub">
+										<p>
+											<span>Subtotal:</span> <span>$${sessionScope.myCartTotal}</span>
+										</p>
+										<p>
+											<span>Delivery:</span> <span>$0.00</span>
+										</p>
+										<p>
+											<span>Discount:</span> <span>$45.00</span>
+										</p>
+									</div>
+									<div class="grand-total">
+										<p>
+											<span><strong>Total:</strong></span> <span>$${sessionScope.myCartTotal}</span>
+										</p>
+									</div>
+								</div>
+								<a class="btn btn-primary" href="${pageContext.request.contextPath}/checkout">Checkout</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- -->
+			</div>
+
+			<div class="row">
+				<div
+					class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+					<h2>Related Products</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 col-lg-3 mb-4 text-center">
+					<div class="product-entry border">
+						<a href="#" class="prod-img"> <img
+							src="${pageContext.request.contextPath}/resources/page/images/item-1.jpg"
+							class="img-fluid" alt="Free html5 bootstrap 4 template">
+						</a>
+						<div class="desc">
+							<h2>
+								<a href="#">Women's Boots Shoes Maca</a>
+							</h2>
+							<span class="price">$139.00</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-lg-3 mb-4 text-center">
+					<div class="product-entry border">
+						<a href="#" class="prod-img"> <img
+							src="${pageContext.request.contextPath}/resources/page/images/item-2.jpg"
+							class="img-fluid" alt="Free html5 bootstrap 4 template">
+						</a>
+						<div class="desc">
+							<h2>
+								<a href="#">Women's Minam Meaghan</a>
+							</h2>
+							<span class="price">$139.00</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-lg-3 mb-4 text-center">
+					<div class="product-entry border">
+						<a href="#" class="prod-img"> <img
+							src="${pageContext.request.contextPath}/resources/page/images/item-3.jpg"
+							class="img-fluid" alt="Free html5 bootstrap 4 template">
+						</a>
+						<div class="desc">
+							<h2>
+								<a href="#">Men's Taja Commissioner</a>
+							</h2>
+							<span class="price">$139.00</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-lg-3 mb-4 text-center">
+					<div class="product-entry border">
+						<a href="#" class="prod-img"> <img
+							src="${pageContext.request.contextPath}/resources/page/images/item-4.jpg"
+							class="img-fluid" alt="Free html5 bootstrap 4 template">
+						</a>
+						<div class="desc">
+							<h2>
+								<a href="#">Russ Men's Sneakers</a>
+							</h2>
+							<span class="price">$139.00</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</section>
-	<!--================End Cart Area =================-->
-
-	<!-- start footer Area -->
+	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
+
 </body>
 </html>
+

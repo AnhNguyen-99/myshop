@@ -1,59 +1,51 @@
 package com.myshop.entity;
 
-import java.util.Calendar;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.myshop.entity.Orders;
 
 @Entity
-@Table(name = "orderitem", catalog = "myshop_1")
-public class OrderItem implements java.io.Serializable {
+@Table(name = "orderitem", catalog = "myshop")
+public class Orderitem implements java.io.Serializable {
 
-	private static final long serialVersionUID = -4187741387229353122L;
+	private static final long serialVersionUID = 2960663706677393032L;
 	
-	private Integer orderItemId;
-	private Order order;
+	private int orderItemId;
+	private Orders orders;
 	private Product product;
-	private Integer orderItemQuantity;
-	private Float orderItemPrice;
-	private Boolean orderItemStatus;
-	private Date createDate;
+	private int quantity;
+	private double price;
 
-	public OrderItem() {
-		Calendar c = Calendar.getInstance();
-		this.createDate = c.getTime();
+	public Orderitem() {
 	}
 
-	
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderItemId", unique = true, nullable = false)
-	public Integer getOrderItemId() {
+	public int getOrderItemId() {
 		return this.orderItemId;
 	}
 
-	public void setOrderItemId(Integer orderItemId) {
+	public void setOrderItemId(int orderItemId) {
 		this.orderItemId = orderItemId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orderId", nullable = false)
-	public Order getOrders() {
-		return this.order;
+	public Orders getOrders() {
+		return this.orders;
 	}
 
-	public void setOrders(Order order) {
-		this.order = order;
+	public void setOrders(Orders orders) {
+		this.orders = orders;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -66,41 +58,22 @@ public class OrderItem implements java.io.Serializable {
 		this.product = product;
 	}
 
-	@Column(name = "orderItemQuantity")
-	public Integer getOrderItemQuantity() {
-		return this.orderItemQuantity;
+	@Column(name = "quantity", nullable = false)
+	public int getQuantity() {
+		return this.quantity;
 	}
 
-	public void setOrderItemQuantity(Integer orderItemQuantity) {
-		this.orderItemQuantity = orderItemQuantity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
-	@Column(name = "orderItemPrice", precision = 12, scale = 0)
-	public Float getOrderItemPrice() {
-		return this.orderItemPrice;
+	@Column(name = "price", nullable = false, precision = 22, scale = 0)
+	public double getPrice() {
+		return this.price;
 	}
 
-	public void setOrderItemPrice(Float orderItemPrice) {
-		this.orderItemPrice = orderItemPrice;
-	}
-
-	@Column(name = "orderItemStatus")
-	public Boolean getOrderItemStatus() {
-		return this.orderItemStatus;
-	}
-
-	public void setOrderItemStatus(Boolean orderItemStatus) {
-		this.orderItemStatus = orderItemStatus;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createDate", length = 26)
-	public Date getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 }

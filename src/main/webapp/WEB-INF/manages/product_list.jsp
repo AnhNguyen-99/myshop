@@ -1,88 +1,116 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib prefix="mytag" uri="/WEB-INF/taglibs/newtag_library.tld" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Product</title>
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/page/img/fav.png">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Danh sách sản phẩm</title>
 </head>
 <body>
 
-	<div class="page-container">
+	<div id="wrapper">
 
-		<div class="left-content">
+		<jsp:include page="menu.jsp"></jsp:include>
 
-			<div class="mother-grid-inner">
-
-				<jsp:include page="header.jsp"></jsp:include>
-
-				<div class="inner-block">
-					<div class="inbox">
-						<h2>Quản lý sản phẩm</h2>
-						<div class="col-md-12 mailbox-content  tab-content tab-content-in">
-							<div class="tab-pane active text-style" id="tab1">
-								<div class="mailbox-border">
-									<div class="mail-toolbar clearfix">
-										<div class="float-left">
-											<div class="btn btn_1 btn-default mrg5R">
-												<a href="${pageContext.request.contextPath}/manages/product/add"><i class="fa fa-plus">ADD</i></a>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-
-									</div>
-									<table class="table tab-border">
-										<tbody>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Danh sách sản phẩm</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">DataTables Advanced Tables</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-hover"
+										id="dataTables-example">
+										<thead>
 											<tr>
-												<td class="hidden-xs" style="text-align: center"><b>Tên
-														sản phẩm</b></td>
-												<td class="hidden-xs" style="width: 150px;"><b>Tên
-														danh mục</b></td>
-												<td style="text-align: center; width: 100px;"><b>Giá</b>
-												</td>
-												<td style="text-align: center; width: 100px;"><b>Khuyến
-														mại</b></td>
-												<td style="text-align: center; width: 150px;"><b>Option</b>
-												</td>
+												<th>Mã sản phẩm</th>
+												<th>Ảnh sản phẩm</th>
+												<th>Tên danh mục</th>
+												<th>Tên NSX</th>
+												<th>Tên sản phẩm</th>
+												<th>Giá</th>
+												<th>Khuyến mại</th>
+												<th>Ngày tạo</th>
+												<th>Lựa chọn</th>
 											</tr>
-											<c:forEach var="item" items="${listProduct}">
-												<tr class="unread checked">
-													<td class="hidden-xs" style="width: 200px">
-														${item.productName}</td>
-													<td class="hidden-xs" style="width: 150px;">
-														${item.category.categoryName}
-													</td> 
-													<td style="text-align: left; width: 100px;">
-														${item.productPrice} VNĐ</td>
-													<td style="text-align: center; width: 100px;">
-														${item.productSale}%</td>
-													<td style="text-align: center; width: 150px;">
-													<a class="btn btn-default" href="${pageContext.request.contextPath}/edit/${item.productId}"><i class="fa fa-edit"></i></a>
-													<a class="btn btn-default" href="${pageContext.request.contextPath}/manages/product/remove/${item.productId}" onclick=" return confirm('Bạn có muốn xóa?')"><i class="fa fa-remove"></i></a>
-													</td>
+										</thead>
+										<tbody>
+											<c:forEach items="${listProduct}" var="item">
+												<tr>
+													<td>${item.productId}</td>
+													<td><img src="${pageContext.request.contextPath}/resources/page/images/product/${item.productImage}" height="100px" width="100px"></td>
+													<td>${item.category.categoryName}</td>
+													<td>${item.producer.producerId}</td>
+													<td>${item.producerName}</td>
+													<td>${item.productPrice}</td>
+													<td>${item.productSale}</td>
+													<td>${item.createDate}</td>
+													<td><a class='btn btn-default'
+														href='${pageContext.request.contextPath}/manages/product/edit/${item.productId}'><i
+															class='fa fa-edit'></i></a>
+														<p class='btn btn-default'
+															onclick='checkdel(${item.productId})'>
+															<i class='fa fa-trash'></i>
+														</p></td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
-									<mytag:PaginationTagHander count = "${count}" steps="${maxResult}" offset="${offset}" uri="${pageContext.request.contextPath}/manages/product/list" next="&raquo;" previous="&laquo;"/>
+
 								</div>
+
 							</div>
+
 						</div>
-						<div class="clearfix"></div>
+
 					</div>
+					
 				</div>
-
-				<jsp:include page="footer.jsp"></jsp:include>
-
+				
 			</div>
-
+			
 		</div>
 
-		<jsp:include page="navigation.jsp"></jsp:include>
-
 	</div>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/jquery.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/bootstrap.min.js"></script>
+
+	<script	src="${pageContext.request.contextPath}/resources/manages/js/metisMenu.min.js"></script>
+
+	<script	src="${pageContext.request.contextPath}/resources/manages/js/dataTables/jquery.dataTables.min.js"></script>
+
+	<script	src="${pageContext.request.contextPath}/resources/manages/js/dataTables/dataTables.bootstrap.min.js"></script>
+
+	<script	src="${pageContext.request.contextPath}/resources/manages/js/startmin.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').DataTable({
+				responsive : true
+			});
+		});
+	</script>
+
+	<script>
+        function checkdel(productId) {
+            var productId = productId;
+            var link = "${pageContext.request.contextPath}/manages/product/delete/" + productId;
+            if (confirm("Bạn có chắc chắn muốn xóa danh mục này?") == true)
+                window.open(link, "_self", 1);
+        }
+    </script>
 
 </body>
 </html>

@@ -1,82 +1,106 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Producer</title>
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/page/img/fav.png">
-    </head>
-    <body>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Danh sách NSX</title>
+</head>
+<body>
 
-        <div class="page-container">	
+	<div id="wrapper">
 
-            <div class="left-content">
+	<jsp:include page="menu.jsp"></jsp:include>
 
-                <div class="mother-grid-inner">
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Danh sách NSX</h1>
+					</div>
+				</div>
 
-                    <jsp:include page="header.jsp"></jsp:include>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">DataTables Advanced Tables</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-hover"
+										id="dataTables-example">
+										<thead>
+											<tr>
+												<th>Mã NSX</th>
+												<th>Tên NSX</th>
+												<th>Người tạo</th>
+												<th>Ngày tạo</th>
+												<th>Lựa chọn</th>
+											</tr>
+										</thead>
+										<tbody>
+										<c:forEach items="${listProducer}" var="item">
+											<tr>
+												<td>${item.producerId}</td>
+												<td>${item.producerName}</td>
+												<td>${item.account.fullName}</td> 
+												<td>${item.createDate}</td>
+												<td>
+													<a class='btn btn-default' href='${pageContext.request.contextPath}/manages/producer/edit/${item.producerId}'><i class='fa fa-edit'></i></a>
+                                                    <p class='btn btn-default' onclick = 'checkdel(${item.producerId})'><i class='fa fa-trash'></i></p>
+												</td>
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+									
+								</div>
+								
+							</div>
 
-                        <div class="inner-block">
-                            <div class="inbox">
-                                <h2>Quản lý nhà sản xuất</h2>
-                                <h4>${status}</h4>
-                                <div class="col-md-12 mailbox-content  tab-content tab-content-in">
-                                    <div class="tab-pane active text-style" id="tab1">
-                                        <div class="mailbox-border">
-                                            <div class="mail-toolbar clearfix">
-                                                <div class="float-left">
-                                                    <div class="btn btn_1 btn-default mrg5R">
-                                                        <a href="${pageContext.request.contextPath}/manages/producer/add"><i class="fa fa-plus">ADD</i></a>
-                                                </div>
-                                                <div class="clearfix"> </div>
-                                            </div>                                            
-                                        </div>
-                                        <table class="table tab-border">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="hidden-xs" style="width: 200px;">
-                                                        <b>Producer</b>
-                                                    </td>                                                    
-                                                    <td class="hidden-xs" style="width: 200px;">
-                                                        <b>Create Date</b>
-                                                    </td>                                                    
-                                                    <td style="text-align: center; width: 150px;">
-                                                        <b>Option</b>
-                                                    </td>
-                                                </tr>
-                                                <c:forEach var="item" items="${listProducer}">
-                                                    <tr class="unread checked">
-                                                        <td class="hidden-xs" style="width: 200px;">
-                                                            ${item.producerName}
-                                                        </td>
-                                                        <td class="hidden-xs" style="width: 200px;">
-                                                            ${item.createDate}
-                                                        </td>
-                                                        <td style="text-align: center; width: 150px;">
-                                                            <a class="btn btn-default" href="${pageContext.request.contextPath}/manages/producer/edit/${item.producerId}"><i class="fa fa-edit"></i></a>
-                                                            <a class="btn btn-default" href="${pageContext.request.contextPath}/manages/producer/remove/${item.producerId}"><i class="fa fa-remove"></i></a> 
-                                                        </td>
-                                                    </tr>
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>   
-                                </div>
-                            </div>
-                            <div class="clearfix"> </div>     
-                        </div>
-                    </div>
+						</div>
+						
+					</div>
 
-                    <jsp:include page="footer.jsp"></jsp:include>
+				</div>
 
-                    </div>
+			</div>
 
-                </div>
+		</div>
 
-            <jsp:include page="navigation.jsp"></jsp:include>
+	</div>
 
-        </div>
+	<script src="${pageContext.request.contextPath}/resources/manages/js/jquery.min.js"></script>
 
-    </body>
+	<script src="${pageContext.request.contextPath}/resources/manages/js/bootstrap.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/metisMenu.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/dataTables/jquery.dataTables.min.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/resources/manages/js/dataTables/dataTables.bootstrap.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/startmin.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').DataTable({
+				responsive : true
+			});
+		});
+	</script>
+	
+	<script>
+        function checkdel(producerId) {
+            var producerId = producerId;
+            var link = "${pageContext.request.contextPath}/manages/producer/delete/" + producerId;
+            if (confirm("Bạn có chắc chắn muốn xóa NSX này?") == true)
+                window.open(link, "_self", 1);
+        }
+    </script>
+
+</body>
 </html>

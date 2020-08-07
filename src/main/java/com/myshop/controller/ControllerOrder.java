@@ -20,18 +20,17 @@ public class ControllerOrder {
 	private OrderItemService orderItemService;
 	
 	@RequestMapping(value = "/list")
-	public String viewListOrder(Model model, Integer offset, Integer maxResult) {
-		model.addAttribute("listOrder", orderService.getListNav(offset, maxResult));
-		model.addAttribute("offset", offset == null ? 0 : offset);
-        model.addAttribute("maxResult", maxResult == null ? 6 : maxResult);
-        model.addAttribute("count", orderService.totalItem());
+	public String viewList(Model model) {
+		model.addAttribute("listOrder", orderService.getAll());
 		return "manages/order_list";
 	}
 	
-	@RequestMapping(value = "/orderDetail/{orderId}")
-    public String viewOrderDetail(@PathVariable("orderId") Integer orderId, Model model){
-        model.addAttribute("order", orderService.findById(orderId));
-        model.addAttribute("listOrderDetail", orderItemService.getListByOrderId(orderId));
-        return "manages/orderItem_detail";
-    }
+	@RequestMapping(value = "/orderItem/{orderId}")
+	public String viewOrderItem(@PathVariable("orderId") int orderId, Model model) {
+		model.addAttribute("order", orderService.findById(orderId));
+		model.addAttribute("listOrderItem", orderItemService.getByOrderId(orderId));
+		return "manages/orderItem_list";
+	}
+	
+	
 }

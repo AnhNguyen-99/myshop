@@ -13,11 +13,11 @@ import com.myshop.entity.Producer;
 @Repository(value = "producerDAO")
 @Transactional(rollbackFor = Exception.class)
 public class ProducerDAO {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	public boolean create(final Producer producer) {
+	
+	public boolean save(final Producer producer) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(producer);
@@ -28,7 +28,7 @@ public class ProducerDAO {
 		return false;
 	}
 	
-	public boolean update(Producer producer) {
+	public boolean update(final Producer producer) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.merge(producer);
@@ -39,7 +39,7 @@ public class ProducerDAO {
 		return false;
 	}
 	
-	public boolean delete(Producer producer) {
+	public boolean delete(final Producer producer) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.delete(producer);
@@ -50,14 +50,14 @@ public class ProducerDAO {
 		return false;
 	}
 	
+	public List<Producer> getAll(){
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.createQuery("FROM Producer", Producer.class).getResultList();
+	}
+	
 	public Producer findById(int producerId) {
 		Session session = this.sessionFactory.getCurrentSession();
 		return session.get(Producer.class, producerId);
-	}
-	
-	public List<Producer>getAll(){
-		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Producer", Producer.class).getResultList();
 	}
 	
 }

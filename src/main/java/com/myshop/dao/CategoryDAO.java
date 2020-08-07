@@ -16,8 +16,7 @@ public class CategoryDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	// save
+	
 	public boolean save(final Category category) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
@@ -28,27 +27,37 @@ public class CategoryDAO {
 		}
 		return false;
 	}
-
-	//update
-	public void update(final Category category) {
+	
+	public boolean update(final Category category) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.merge(category);
+		try {
+			session.merge(category);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
 	}
 	
-	// delete
-	public void delete(final Category category) {
+	public boolean delete(final Category category) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.delete(category);
+		try {
+			session.delete(category);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
 	}
 	
-	// getall
-	public List<Category> findAll() {
+	public List<Category> getAll(){
 		Session session = this.sessionFactory.getCurrentSession();
 		return session.createQuery("FROM Category", Category.class).getResultList();
 	}
 	
-	public Category findById(final int categoryId) {
+	public Category findById(int categoryId) {
 		Session session = this.sessionFactory.getCurrentSession();
 		return session.get(Category.class, categoryId);
 	}
+	
 }

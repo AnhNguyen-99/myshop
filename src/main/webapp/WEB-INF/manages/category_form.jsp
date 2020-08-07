@@ -1,50 +1,74 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Category News</title>
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/page/img/fav.png">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Tạo mới danh mục</title>
 </head>
 <body>
 
-	<div class="page-container">
+	<div id="wrapper">
 
-		<div class="left-content">
-
-			<div class="mother-grid-inner">
-
-				<jsp:include page="header.jsp"></jsp:include>
-
-				<div class="inner-block">
-					<div class="inbox">
-						<h2>Danh mục</h2>
-						<div class="col-md-12 compose-right">
-							<div class="inbox-details-default">
-								<div class="inbox-details-heading">${status}</div>
-								<div class="inbox-details-body">
-									<div class="alert alert-info">Vui lòng điền chi tiết thông tin vào trường bên dưới</div>
-									<form:form method="POST" modelAttribute="category" class="com-mail"	action="${pageContext.request.contextPath}/manages/category/save">
-										<br />
-										<form:input type="hidden" path="categoryId" readonly="true"
-											required="true" />
-										<label>Tên danh mục</label>
-										<form:input path="categoryName" required="true" />
-										<input type="submit" value="Save">
-									</form:form>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix"></div>
+		<jsp:include page="menu.jsp"></jsp:include>
+		
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Forms</h1>
 					</div>
+
 				</div>
-				<jsp:include page="footer.jsp"></jsp:include>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Tạo danh mục mới</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-12">
+										<!-- Form tạo danh mục -->
+										<form:form action="${pageContext.request.contextPath}/manages/category/save" method="POST" modelAttribute="category">
+											<div class="form-group">
+												<label>Tên danh mục</label>
+												 <form:input class="form-control" type="text" path="categoryName"/>
+											</div>
+											<div class="form-group">
+												<input type="reset" class="btn btn-default"	value="Hủy"> 
+												<input type="submit" class="btn btn-primary" value="Lưu">
+											</div>
+										</form:form>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
 			</div>
+
 		</div>
-		<jsp:include page="navigation.jsp"></jsp:include>
+
 	</div>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/jquery.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/bootstrap.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/metisMenu.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/resources/manages/js/startmin.js"></script>
+
 </body>
 </html>

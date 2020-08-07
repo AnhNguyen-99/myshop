@@ -1,105 +1,139 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Footer</title>
-    </head>
-    <body>
-        	<!-- start footer Area -->
-	<footer class="footer-area section_gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>About Us</h6>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
-						</p>
-					</div>
-				</div>
-				<div class="col-lg-4  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Newsletter</h6>
-						<p>Stay update with our latest</p>
-						<div class="" id="mc_embed_signup">
-
-							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-							 method="get" class="form-inline">
-
-								<div class="d-flex flex-row">
-
-									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
-									 required="" type="email">
-
-
-									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
-									<div style="position: absolute; left: -5000px;">
-										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-									</div>
-
-									<!-- <div class="col-lg-4 col-md-4">
-												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-											</div>  -->
-								</div>
-								<div class="info"></div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget mail-chimp">
-						<h6 class="mb-20">Instragram Feed</h6>
-						<ul class="instafeed d-flex flex-wrap">
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i1.jpg" alt=""></li>
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i2.jpg" alt=""></li>
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i3.jpg" alt=""></li>
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i4.jpg" alt=""></li>
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i5.jpg" alt=""></li>
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i6.jpg" alt=""></li>
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i7.jpg" alt=""></li>
-							<li><img src="${pageContext.request.contextPath}/resources/page/img/i8.jpg" alt=""></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
-						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
+<footer id="colorlib-footer" role="contentinfo">
+	<div class="container">
+		<div class="row row-pb-md">
+			<div class="col footer-col colorlib-widget">
+				<h4>About Footwear</h4>
+				<p>Even the all-powerful Pointing has no control about the blind
+					texts it is an almost unorthographic life</p>
+				<ul class="colorlib-social-icons">
+					<li><a href="#"><i class="icon-twitter"></i></a></li>
+					<li><a href="#"><i class="icon-facebook"></i></a></li>
+					<li><a href="#"><i class="icon-linkedin"></i></a></li>
+					<li><a href="#"><i class="icon-dribbble"></i></a></li>
+				</ul>
 			</div>
-			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Lê Anh
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
+			<div class="col footer-col colorlib-widget">
+				<h4>Customer Care</h4>
+				<!-- <p> -->
+				<ul class="colorlib-footer-links">
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Returns/Exchange</a></li>
+					<li><a href="#">Gift Voucher</a></li>
+					<li><a href="#">Wishlist</a></li>
+					<li><a href="#">Special</a></li>
+					<li><a href="#">Customer Services</a></li>
+					<li><a href="#">Site maps</a></li>
+				</ul>
+			</div>
+			<div class="col footer-col colorlib-widget">
+				<h4>Information</h4>
+				<ul class="colorlib-footer-links">
+					<li><a href="#">About us</a></li>
+					<li><a href="#">Delivery Information</a></li>
+					<li><a href="#">Privacy Policy</a></li>
+					<li><a href="#">Support</a></li>
+					<li><a href="#">Order Tracking</a></li>
+				</ul>
+			</div>
+
+			<div class="col footer-col">
+				<h4>News</h4>
+				<ul class="colorlib-footer-links">
+					<li><a href="blog.html">Blog</a></li>
+					<li><a href="#">Press</a></li>
+					<li><a href="#">Exhibitions</a></li>
+				</ul>
+			</div>
+
+			<div class="col footer-col">
+				<h4>Contact Information</h4>
+				<ul class="colorlib-footer-links">
+					<li>291 South 21th Street, <br> Suite 721 New York NY
+						10016
+					</li>
+					<li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+					<li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+					<li><a href="#">yoursite.com</a></li>
+				</ul>
 			</div>
 		</div>
-	</footer>
-	<!-- End footer Area -->
+	</div>
+	<div class="copy">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<p>
+					<span> Copyright &copy;<script>
+						document.write(new Date().getFullYear());
+					</script> All rights reserved | This template is made with <i
+						class="icon-heart" aria-hidden="true"></i> by <a
+						href="https://colorlib.com" target="_blank">Colorlib</a>
+					</span> <span class="block">Demo Images: <a
+						href="http://unsplash.co/" target="_blank">Unsplash</a> , <a
+						href="http://pexels.com/" target="_blank">Pexels.com</a></span>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
 
-	<script src="${pageContext.request.contextPath}/resources/page/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	 crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/vendor/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/jquery.ajaxchimp.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/jquery.sticky.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/nouislider.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/countdown.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/jquery.magnific-popup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/gmaps.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/page/js/main.js"></script>
-    </body>
-</html>
+<div class="gototop js-top">
+	<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/jquery.min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/popper.min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/bootstrap.min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/jquery.easing.1.3.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/jquery.waypoints.min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/jquery.flexslider-min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/owl.carousel.min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/jquery.magnific-popup.min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/magnific-popup-options.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/bootstrap-datepicker.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/jquery.stellar.min.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/page/js/main.js"></script>
+
+
+<script>
+$(document).ready(function() {
+	var quantitiy = 0;
+	$('.quantity-right-plus').click(function(e) {
+		e.preventDefault();
+		var quantity = parseInt($('#quantity').val());
+		$('#quantity').val(quantity + 1);
+	});
+
+	$('.quantity-left-minus').click(function(e) {
+		e.preventDefault();
+		var quantity = parseInt($('#quantity').val());
+		if (quantity > 0) {
+			$('#quantity').val(quantity - 1);
+		}
+	});
+
+});
+</script>
+

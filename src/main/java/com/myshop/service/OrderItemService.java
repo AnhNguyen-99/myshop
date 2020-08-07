@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.dao.OrderItemDAO;
-import com.myshop.entity.OrderItem;
+import com.myshop.entity.Orderitem;
 
 @Service
 @Transactional
@@ -16,24 +16,11 @@ public class OrderItemService {
 	@Autowired
 	private OrderItemDAO orderItemDAO;
 	
-	public void create(final OrderItem orderItem) {
-		orderItemDAO.create(orderItem);
+	public void save(final Orderitem orderitem) {
+		orderItemDAO.save(orderitem);
 	}
-    
-    public void update(final OrderItem orderItem) {
-    	orderItemDAO.update(orderItem);
-    }
-    
-    public void delete(final OrderItem orderItem) {
-    	orderItemDAO.delete(orderItem);
-    }
-    
-    public OrderItem findById(final int orderItemId) {
-    	return orderItemDAO.findById(orderItemId);
-    }
-    
-    public List<OrderItem> getListByOrderId(Integer orderId){
-    	return orderItemDAO.getListByOrderId(orderId);
-    }
-   
+	
+	public List<Orderitem> getByOrderId(Integer orderId){
+		return orderItemDAO.getByOrderId(orderId);
+	}
 }

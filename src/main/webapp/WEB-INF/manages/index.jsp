@@ -1,31 +1,138 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Panel</title>
-    </head>
-    <body>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Home Admin</title>
+</head>
+<body>
 
-        <div class="page-container">	
+	<div id="wrapper">
 
-            <div class="left-content">
+	<jsp:include page="menu.jsp"></jsp:include>
 
-                <div class="mother-grid-inner">
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Dashboard</h1>
+					</div>
 
-                    <jsp:include page="header.jsp"></jsp:include>
+				</div>
 
-                    <jsp:include page="content.jsp"></jsp:include>
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-comments fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">26</div>
+										<div>New Comments!</div>
+									</div>
+								</div>
+							</div>
+							<a href="#">
+								<div class="panel-footer">
+									<span class="pull-left">View Details</span> <span
+										class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
-                    <jsp:include page="footer.jsp"></jsp:include>
+									<div class="clearfix"></div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-green">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-tasks fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">12</div>
+										<div>New Tasks!</div>
+									</div>
+								</div>
+							</div>
+							<a href="#">
+								<div class="panel-footer">
+									<span class="pull-left">View Details</span> <span
+										class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
-                </div>
+									<div class="clearfix"></div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-yellow">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-shopping-cart fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">124</div>
+										<div>New Orders!</div>
+									</div>
+								</div>
+							</div>
+							<a href="#">
+								<div class="panel-footer">
+									<span class="pull-left">View Details</span> <span
+										class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
-            </div>
+									<div class="clearfix"></div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-red">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-support fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">13</div>
+										<div>Support Tickets!</div>
+									</div>
+								</div>
+							</div>
+							<a href="#">
+								<div class="panel-footer">
+									<span class="pull-left">View Details</span> <span
+										class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
-            <jsp:include page="navigation.jsp"></jsp:include>
+									<div class="clearfix"></div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
 
-        </div>
+			</div>
 
-    </body>
+		</div>
+
+	</div>
+
+	<!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/resources/manages/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/manages/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/manages/js/metisMenu.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/manages/js/startmin.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/manages/js/dataTables/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/manages/js/dataTables/dataTables.bootstrap.min.js"></script>
+
+</body>
 </html>

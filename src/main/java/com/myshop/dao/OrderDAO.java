@@ -8,64 +8,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myshop.entity.Order;
+import com.myshop.entity.Orders;
 
 @Repository(value = "orderDAO")
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class OrderDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public void create(final Order order) {
+	public void save(final Orders orders) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(order);
+		session.save(orders);
 	}
-    
-    public void update(Order order) {
-    	Session session = this.sessionFactory.getCurrentSession();
-		session.merge(order);
-    }
-    
-    public void delete(Order order) {
-    	Session session = this.sessionFactory.getCurrentSession();
-		session.delete(order);
-    }
-    
-    public Order findById(Integer orderId) {
-    	Session session = this.sessionFactory.getCurrentSession();
-    	return session.get(Order.class , orderId);
-    }
-    
-    public List<Order> getAll(){
-    	Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Order", Order.class).getResultList();
-    }
-    
-    public List<Order> getOrderByAccountId(int accountId){
-    	Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Order WHER accountId =:accountId", Order.class).setParameter("accountId", accountId).getResultList();
-    }
-        
-    public boolean confirmOrder(Integer orderId) {
-    	Session session = this.sessionFactory.getCurrentSession();
-    	try {
-			 session.createQuery("UPDATE Orders SET orderStatus = true WHERE orderId =:orderId").setParameter("orderId", orderId).executeUpdate();
-			 return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-    	return false;
-    }
-    
-    public int totalItem() {
-    	Session session = this.sessionFactory.getCurrentSession();
-		int size = session.createQuery("FROM Order", Order.class).list().size();
-		return size;
-    }
-    
-    public List<Order> getListNav(Integer offset, Integer maxResult){
-    	Session session = this.sessionFactory.getCurrentSession();
-    	return session.createQuery("FROM Order", Order.class).setFirstResult(offset == null?0:offset).setMaxResults(maxResult == null?6:maxResult).getResultList();
-    }
+	
+	public Orders findById(int orderId) {
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.get(Orders.class, orderId);
+	}
+	
+	public List<Orders> getAll(){
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.createQuery("FROM Orders ORDER BY orderDate DESC", Orders.class).getResultList();
+	}
+	
+	public List<Orders> getByAccountId(int accountId){
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.createQuery("FROM Orders WHERE accountId =:accountId ORDER BY orderDate DESC", Orders.class).setParameter("accountId", accountId).getResultList();
+	}
+	
 }

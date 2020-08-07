@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.entity.Account;
+import com.myshop.entity.AccountRole;
 
-@Repository(value = "accountDAO")
+@Repository(value="accountDAO")
 @Transactional(rollbackFor = Exception.class)
 public class AccountDAO {
 
@@ -19,19 +20,26 @@ public class AccountDAO {
 	
 	public Account login(String userName, String pass) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Account acc = (Account) session.createQuery("FROM Account WHERE accountName =:accountName AND accountPass =:accountPass").setParameter("accountName", userName).setParameter("accountPass", pass).uniqueResult();
-		return acc;
+		Account account = (Account) session.createQuery("FROM Account WHERE accountName =:accountName AND accountPass =:accountPass").setParameter("accountName", userName).setParameter("accountPass", pass).uniqueResult();
+		return account;
 	}
 	
-	public List<Account> getAll(){
+	// role
+	public AccountRole login_role(int accountId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Account", Account.class).getResultList();
+		AccountRole accountRole = (AccountRole) session.createQuery("FROM AccountRole WHERE accountId =:accountId").setParameter("accountId", accountId).uniqueResult();
+		return accountRole;
 	}
 	
-	public boolean create(Account obj) {
+	public List<AccountRole> getListAccountByRoleId(int roleId){
+		Session session = this.sessionFactory.getCurrentSession();
+		return session.createQuery("FROM AccountRole WHERE roleId =:roleId", AccountRole.class).setParameter("roleId", roleId).getResultList();
+	}
+	
+	public boolean save(final Account account) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			session.save(obj);
+			session.save(account);
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -39,36 +47,16 @@ public class AccountDAO {
 		return false;
 	}
 	
-	public boolean update(Account obj) {
+	public Account findByName(String accountName) {
 		Session session = this.sessionFactory.getCurrentSession();
-		try {
-			session.merge(obj);
-			return true;
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-		return false;
+		return session.createQuery("FROM Account WHERE accountName =:accountName", Account.class).setParameter("accountName", accountName).uniqueResult();
 	}
 	
-	public boolean delete(Account obj) {
+	public boolean update(final Account account) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			session.delete(obj);
+			session.merge(account);
 			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return false;
-	}
-	
-	public boolean checkName(String name) {
-		Session session = this.sessionFactory.getCurrentSession();
-		try {
-			List<Account> list = session.createQuery("FROM Account WHERE UPPER(accountName) LIKE :accountName", Account.class).setParameter("accountName", name.toUpperCase()).getResultList();
-			if(list.size() > 0)
-				return true;
-			else
-				return false;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

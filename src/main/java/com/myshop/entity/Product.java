@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,40 +18,51 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "product", catalog = "myshop_1")
+@Table(name = "product", catalog = "myshop")
 public class Product implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1334218165006061223L;
+	private static final long serialVersionUID = -7281994946038357165L;
 
 	private Integer productId;
+	private Account account;
 	private Category category;
 	private Producer producer;
-	private String productName;
+	private String producerName;
 	private String productImage;
-	private String productImage2;
-	private String productImage3;
-	private float productPrice;
-	private int productSale;
-	private String unit;
-	private String shortdescription;
-	private String description;
+	private double productPrice;
+	private Integer productSale;
+	private String content;
+	private String productDescription;
+	private Boolean productStatus;
 	private Date createDate;
-	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
+	private Set<Orderitem> orderitems = new HashSet<Orderitem>(0);
+	private Set<Productdetail> productdetails = new HashSet<Productdetail>(0);
 
 	public Product() {
-		Calendar c = Calendar.getInstance();
-		this.createDate = c.getTime();
+		Calendar calendar = Calendar.getInstance();
+		this.createDate = calendar.getTime();
+		this.productStatus = true;
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "productId", unique = true, nullable = false)
 	public Integer getProductId() {
 		return this.productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "accountId", nullable = false)
+	public Account getAccount() {
+		return this.account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -74,16 +85,16 @@ public class Product implements java.io.Serializable {
 		this.producer = producer;
 	}
 
-	@Column(name = "productName", nullable = false)
-	public String getProductName() {
-		return this.productName;
+	@Column(name = "producerName", nullable = false)
+	public String getProducerName() {
+		return this.producerName;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setProducerName(String producerName) {
+		this.producerName = producerName;
 	}
 
-	@Column(name = "productImage", nullable = false)
+	@Column(name = "productImage", nullable = false, length = 100)
 	public String getProductImage() {
 		return this.productImage;
 	}
@@ -92,67 +103,49 @@ public class Product implements java.io.Serializable {
 		this.productImage = productImage;
 	}
 
-	@Column(name = "productImage2", nullable = false)
-	public String getProductImage2() {
-		return this.productImage2;
-	}
-
-	public void setProductImage2(String productImage2) {
-		this.productImage2 = productImage2;
-	}
-
-	@Column(name = "productImage3", nullable = false)
-	public String getProductImage3() {
-		return this.productImage3;
-	}
-
-	public void setProductImage3(String productImage3) {
-		this.productImage3 = productImage3;
-	}
-
-	@Column(name = "productPrice", nullable = false, precision = 12, scale = 0)
-	public float getProductPrice() {
+	@Column(name = "productPrice", nullable = false, precision = 22, scale = 0)
+	public double getProductPrice() {
 		return this.productPrice;
 	}
 
-	public void setProductPrice(float productPrice) {
+	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
 
-	@Column(name = "productSale", nullable = false)
-	public int getProductSale() {
+	@Column(name = "productSale")
+	public Integer getProductSale() {
 		return this.productSale;
 	}
 
-	public void setProductSale(int productSale) {
+	public void setProductSale(Integer productSale) {
 		this.productSale = productSale;
 	}
 
-	@Column(name = "unit", length = 20)
-	public String getUnit() {
-		return this.unit;
+	@Column(name = "content", length = 65535)
+	public String getContent() {
+		return this.content;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	@Column(name = "shortdescription")
-	public String getShortdescription() {
-		return this.shortdescription;
+	@Column(name = "productDescription", length = 65535)
+	public String getProductDescription() {
+		return this.productDescription;
 	}
 
-	public void setShortdescription(String shortdescription) {
-		this.shortdescription = shortdescription;
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 
-	@Column(name = "description", length = 65535)
-	public String getDescription() {
-		return this.description;
+	@Column(name = "productStatus")
+	public Boolean getProductStatus() {
+		return this.productStatus;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setProductStatus(Boolean productStatus) {
+		this.productStatus = productStatus;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -166,12 +159,31 @@ public class Product implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<OrderItem> getOrderitems() {
-		return this.orderItems;
+	public Set<Orderitem> getOrderitems() {
+		return this.orderitems;
 	}
 
-	public void setOrderitems(Set<OrderItem> orderItems) {
-		this.orderItems = orderItems;
+	public void setOrderitems(Set<Orderitem> orderitems) {
+		this.orderitems = orderitems;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	public Set<Productdetail> getProductdetails() {
+		return this.productdetails;
+	}
+
+	public void setProductdetails(Set<Productdetail> productdetails) {
+		this.productdetails = productdetails;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", account=" + account + ", category=" + category + ", producer="
+				+ producer + ", producerName=" + producerName + ", productImage=" + productImage + ", productPrice="
+				+ productPrice + ", productSale=" + productSale + ", content=" + content + ", productDescription="
+				+ productDescription + ", productStatus=" + productStatus + ", createDate=" + createDate
+				+ ", orderitems=" + orderitems + ", productdetails=" + productdetails + "]";
+	}
+
+	
 }

@@ -2,8 +2,6 @@ package com.myshop.dao;
 
 import java.util.List;
 
-//import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,7 @@ public class ProductDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	// Save
-	public boolean create(final Product product) {
+	public boolean save(Product product) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(product);
@@ -31,8 +28,7 @@ public class ProductDAO {
 		return false;
 	}
 	
-	// Update
-	public boolean update(final Product product) {
+	public boolean update(Product product) {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.merge(product);
@@ -43,77 +39,29 @@ public class ProductDAO {
 		return false;
 	}
 	
-	// Delete
-	public void delete(final Product product) {
+	public boolean delete(final Product product) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.delete(product);
+		try {
+			session.delete(product);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
 	}
 	
-	// Find by id
-	public Product findById(final int productId) {
-		Session session = this.sessionFactory.getCurrentSession();
-		return session.get(Product.class, productId);
-	}
-	
-	// Getall
 	public List<Product> getAll(){
 		Session session = this.sessionFactory.getCurrentSession();
 		return session.createQuery("FROM Product", Product.class).getResultList();
 	}
 	
-	// List ProductSale
-	public List<Product> getListBySale(int limit){
+	public Product findById(int productId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product ORDER BY productSale DESC", Product.class).setMaxResults(limit).getResultList();
+		return session.get(Product.class, productId);
 	}
-	
-	// listProductPrice
-	public List<Product> getListByPrice(int limit){
+
+	public List<Product> findByName(String producerName){
 		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product ORDER BY productPrice DESC", Product.class).setMaxResults(limit).getResultList();
-	}
-	
-	public List<Product> getListNav(Integer offset, Integer maxResult){
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product ORDER BY createDate DESC", Product.class).setFirstResult(offset == null?0:offset).setMaxResults(maxResult == null?3:maxResult).getResultList();
-        return list;
-	}
-	
-	public int totalItem() {
-		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product", Product.class).getResultList().size();
-	}
-	
-	public List<Product> getListByCategoryAndLimit(Integer categoryId, Integer offset, Integer maxResalt){
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).setFirstResult(offset == null?0:offset).setMaxResults(maxResalt == null?6:maxResalt).getResultList();
-		return list;
-	}
-	
-	public List<Product> getListByCategoryId(Integer categoryId){
-		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).getResultList();
-	}
-	public int totalProductByCategoryId(Integer categoryId) {
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE categoryId =:categoryId", Product.class).setParameter("categoryId", categoryId).getResultList();
-		return list.size();
-	}
-	
-	public List<Product> getListByProductName(String productName){
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE productName LIKE :productName", Product.class).setParameter("productName", productName).getResultList();
-		return list;
-	}
-	
-	public List<Product> getListByProducerAndLimit(Integer producerId, Integer offset, Integer maxResult){
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Product> list = session.createQuery("FROM Product WHERE producerId =:producerId", Product.class).setParameter("producerId", producerId).setFirstResult(offset == null?0:offset).setMaxResults(maxResult == null?6:maxResult).getResultList();
-		return list;
-	}
-	
-	public int totalProductByProducerId(Integer producerId) {
-		Session session = this.sessionFactory.getCurrentSession();
-		return session.createQuery("FROM Product WHERE producerId =:producerId", Product.class).setParameter("producerId", producerId).getResultList().size();
+		return session.createQuery("FROM Product WHERE producerName LIKE :producerName", Product.class).setParameter("producerName", producerName).getResultList();
 	}
 }

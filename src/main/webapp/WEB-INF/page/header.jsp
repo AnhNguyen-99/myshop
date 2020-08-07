@@ -2,86 +2,97 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Favicon-->
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/page/img/fav.png">
-        <!-- Author Meta -->
-        <meta name="author" content="CodePixar">
-        <!-- Meta Description -->
-        <meta name="description" content="">
-        <!-- Meta Keyword -->
-        <meta name="keywords" content="">
-        <!-- meta character set -->
-        <meta charset="UTF-8">
-        <title>header</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/linearicons.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/themify-icons.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/bootstrap.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/owl.carousel.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/nice-select.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/nouislider.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/ion.rangeSlider.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/ion.rangeSlider.skinFlat.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/magnific-popup.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/main.css">
-    </head>
-    <body>
+<head>
+	
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+	
+	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 
-        <header class="header_area sticky-header">
-            <div class="main_menu">
-                <nav class="navbar navbar-expand-lg navbar-light main_box">
-                    <div class="container">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/resources/page/img/logo.png" alt=""></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav menu_nav ml-auto">
-                                <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/home">Trang chủ</a></li>
-                                <li class="nav-item submenu dropdown">
-                                    <a href="${pageContext.request.contextPath}/shop" class="nav-link dropdown-toggle"  role="button" aria-haspopup="true">Shop</a>
-                                </li>
-                                <li class="nav-item submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                       aria-expanded="false">
-                                        <span class="ti-user"> ${sessionScope.myLogin.accountName}</span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.thuoctinh1}">${sessionScope.thuoctinh1}</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.thuoctinh2}">${sessionScope.thuoctinh2}</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact">Liên hệ</a></li>
-                                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/blog">Blog</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item"><a href="${pageContext.request.contextPath}/cart/viewcart" class="cart"><span class="ti-bag"><sup style="background:red;border-radious:20px;"><c:out value="${sessionScope.myCartNum}"/></sup></span></a></li>
-                                <li class="nav-item">
-                                    <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-                                </li>
-                            </ul> 
-                        </div> 
-                    </div>
-                </nav>
-            </div>
-            <!-- Tìm kiếm -->
-            <div class="search_input" id="search_input_box">
-                <div class="container">
-                    <form class="d-flex justify-content-between" action="${pageContext.request.contextPath}/search" method="GET">
-                        <input type="text" class="form-control" id="search_input" name="query" placeholder="Search Here">
-                        <button type="submit" class="btn"></button>
-                        <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-                    </form>
-                </div>
-            </div> 
-        </header>
-    </body>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/animate.css">
+
+	<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/icomoon.css"> --%>
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/ionicons.min.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/magnific-popup.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/flexslider.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/owl.carousel.min.css">
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/owl.theme.default.min.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/bootstrap-datepicker.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/fonts/flaticon/font/flaticon.css">
+
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/page/css/style.css">
+	
+</head>
+<body>
+
+	<nav class="colorlib-nav" role="navigation">
+		<div class="top-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-7 col-md-9">
+						<div id="colorlib-logo"><a href="${pageContext.request.contextPath}/home">Footwear</a></div>
+					</div>
+					<!-- Tìm kiếm -->
+					<div class="col-sm-5 col-md-3">
+		            <form action="${pageContext.request.contextPath}/search" class="search-wrap" method="get">
+		               <div class="form-group">
+		                  <input type="search" class="form-control search" placeholder="Search" name="query">
+		                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+		               </div>
+		            </form>
+		         </div>
+	         </div>
+				<div class="row">
+					<div class="col-sm-12 text-left menu-1">
+						<ul>
+							<li class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+							<li class="has-dropdown"><a href="${pageContext.request.contextPath}/shop">Shop</a></li>
+							<li><a href="${pageContext.request.contextPath}/about">About</a></li>
+							<li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
+							<%-- <li><a href="${pageContext.request.contextPath}/intsendMail">SendMail</a></li> --%>
+							<li class="cart"><a href="${pageContext.request.contextPath}/cart"><i class="icon-shopping-cart"></i> Cart [<c:out value="${sessionScope.myCartNum}"/>]</a></li>
+							<li class="has-dropdown"><a href=""><i class="icon-user"><c:out value="${sessionScope.myLogin.accountName}"/></i></a>
+								<ul class="dropdown">
+									<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+									<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sale">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center">
+						<div class="row">
+							<div class="owl-carousel2">
+								<div class="item">
+									<div class="col">
+										<h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col">
+										<h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+		
+</body>
 </html>

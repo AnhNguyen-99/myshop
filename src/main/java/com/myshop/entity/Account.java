@@ -1,5 +1,6 @@
 package com.myshop.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,56 +8,53 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "account", catalog = "myshop_1")
+@Table(name = "account", catalog = "myshop")
 public class Account implements java.io.Serializable {
-
-	private static final long serialVersionUID = 1680396039133534680L;
 	
-	private Integer accountId;
-	private Role role;
+	private static final long serialVersionUID = -4328995011502431496L;
+
+	private int accountId;
 	private String accountName;
 	private String accountPass;
 	private String fullName;
-	private String accountMail;
 	private String address;
-	private String moblie;
+	private String mail;
+	private String mobile;
 	private Boolean accountStatus;
 	private Date createDate;
-	private Set<Order> orderses = new HashSet<Order>(0);
+	private Set<AccountRole> accountRoles = new HashSet<AccountRole>(0);
+	private Set<Orders> orderses = new HashSet<Orders>(0);
+	private Set<Producer> producers = new HashSet<Producer>(0);
+	private Set<News> newses = new HashSet<News>(0);
+	private Set<Product> products = new HashSet<Product>(0);
+	private Set<Category> categories = new HashSet<Category>(0);
 
 	public Account() {
+		Calendar calendar = Calendar.getInstance();
+		this.createDate = calendar.getTime();
 	}
 
+	public Account(int accountId) {
+		this.accountId = accountId;
+	}
 	
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "accountId", unique = true, nullable = false)
-	public Integer getAccountId() {
+	public int getAccountId() {
 		return this.accountId;
 	}
 
-	public void setAccountId(Integer accountId) {
+	public void setAccountId(int accountId) {
 		this.accountId = accountId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "roleId", nullable = false)
-	public Role getRole() {
-		return this.role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
 	}
 
 	@Column(name = "accountName", nullable = false, length = 100)
@@ -86,16 +84,7 @@ public class Account implements java.io.Serializable {
 		this.fullName = fullName;
 	}
 
-	@Column(name = "accountMail", length = 100)
-	public String getAccountMail() {
-		return this.accountMail;
-	}
-
-	public void setAccountMail(String accountMail) {
-		this.accountMail = accountMail;
-	}
-
-	@Column(name = "address")
+	@Column(name = "address", nullable = false)
 	public String getAddress() {
 		return this.address;
 	}
@@ -104,13 +93,22 @@ public class Account implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "moblie", length = 20)
-	public String getMoblie() {
-		return this.moblie;
+	@Column(name = "mail", nullable = false, length = 100)
+	public String getMail() {
+		return this.mail;
 	}
 
-	public void setMoblie(String moblie) {
-		this.moblie = moblie;
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	@Column(name = "mobile", nullable = false, length = 10)
+	public String getMobile() {
+		return this.mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	@Column(name = "accountStatus")
@@ -133,12 +131,57 @@ public class Account implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-	public Set<Order> getOrderses() {
+	public Set<AccountRole> getAccountRoles() {
+		return this.accountRoles;
+	}
+
+	public void setAccountRoles(Set<AccountRole> accountRoles) {
+		this.accountRoles = accountRoles;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+	public Set<Orders> getOrderses() {
 		return this.orderses;
 	}
 
-	public void setOrderses(Set<Order> orderses) {
+	public void setOrderses(Set<Orders> orderses) {
 		this.orderses = orderses;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+	public Set<Producer> getProducers() {
+		return this.producers;
+	}
+
+	public void setProducers(Set<Producer> producers) {
+		this.producers = producers;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+	public Set<News> getNewses() {
+		return this.newses;
+	}
+
+	public void setNewses(Set<News> newses) {
+		this.newses = newses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+	public Set<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+	public Set<Category> getCategories() {
+		return this.categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+	
 }

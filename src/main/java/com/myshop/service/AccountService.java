@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.dao.AccountDAO;
 import com.myshop.entity.Account;
+import com.myshop.entity.AccountRole;
 
 @Service
 @Transactional
@@ -16,23 +17,27 @@ public class AccountService {
 	@Autowired
 	private AccountDAO accountDAO;
 	
-	public Account login(String userName, String pass) {
-		return accountDAO.login(userName, pass);
+	public Account login(String accountName, String accountPass) {
+		return accountDAO.login(accountName, accountPass);
 	}
 	
-	public List<Account> getAll(){
-		return accountDAO.getAll();
+	public AccountRole login_role(int accountId) {
+		return accountDAO.login_role(accountId);
 	}
 	
-	public boolean create(Account obj) {
-		return accountDAO.create(obj);
+	public List<AccountRole> getListAccountByRoleId(int roleId){
+		return accountDAO.getListAccountByRoleId(roleId);
 	}
 	
-	public boolean update(Account obj) {
-		return accountDAO.update(obj);
+	public boolean save(final Account account) {
+		return accountDAO.save(account);
 	}
 	
-	public boolean delete(Account obj) {
-		return accountDAO.delete(obj);
+	public Account findByName(String accountName) {
+		return accountDAO.findByName(accountName);
+	}
+	
+	public boolean update(final Account account) {
+		return accountDAO.update(account);
 	}
 }

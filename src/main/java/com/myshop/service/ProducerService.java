@@ -16,23 +16,24 @@ public class ProducerService {
 	@Autowired
 	private ProducerDAO producerDAO;
 	
-	public boolean create(final Producer obj) {
-		return producerDAO.create(obj);
+	public boolean save(final Producer producer) {
+		return producerDAO.save(producer);
 	}
 	
-	public boolean update(Producer producer) {
+	public boolean update(final Producer producer) {
 		return producerDAO.update(producer);
 	}
 	
-	public boolean delete(Producer producer) {
+	public boolean delete(final Producer producer) {
 		return producerDAO.delete(producer);
-	}
-	
-	public Producer findById(int producerId) {
-		return producerDAO.findById(producerId);
 	}
 	
 	public List<Producer> getAll(){
 		return producerDAO.getAll();
 	}
+	
+	public Producer findById(int producerId) {
+		return producerDAO.findById(producerId);
+	}
+
 }

@@ -1,13 +1,15 @@
 package com.myshop.service;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.dao.ProductDAO;
+import com.myshop.dto.ProductDTO;
 import com.myshop.entity.Product;
+import com.myshop.mapper.ProductMapper;
 
 @Service
 @Transactional
@@ -16,64 +18,45 @@ public class ProductService {
 	@Autowired
 	private ProductDAO productDAO;
 	
-	public boolean create(final Product product) {
-		return productDAO.create(product);
+	public boolean save(final Product product) {
+		return productDAO.save(product);
 	}
 	
 	public boolean update(final Product product) {
 		return productDAO.update(product);
 	}
 	
-	public void delete(final Product product) {
-		productDAO.delete(product);
+	public boolean delete(final Product product) {
+		return productDAO.delete(product);
 	}
 	
 	public List<Product> getAll(){
 		return productDAO.getAll();
 	}
 	
-	public Product findById(final int productId) {
+	public Product findById(int productId) {
 		return productDAO.findById(productId);
 	}
 	
-	public List<Product> getListBySale(int limit){
-		return productDAO.getListBySale(limit);
+	public List<Product> findByName(String productName){
+		return productDAO.findByName(productName);
 	}
 	
-	public List<Product> getListByPrice(int limit){
-		return productDAO.getListByPrice(limit);
+	public List<ProductDTO> findAll(){
+		List<ProductDTO> listDTO = new ArrayList<>();
+		List<Product> list = productDAO.getAll();
+		for(Product product: list) {
+			ProductMapper productMapper = new ProductMapper();
+			ProductDTO productDTO = productMapper.toProductDTO(product);
+			listDTO.add(productDTO);
+		}
+		return listDTO;
 	}
 	
-	public List<Product> getListNav(Integer offset, Integer maxResult){
-		return productDAO.getListNav(offset, maxResult);
+	public ProductDTO getById(int productId) {
+		Product product = productDAO.findById(productId);
+		ProductMapper productMapper = new ProductMapper();
+		ProductDTO productDTO = productMapper.toProductDTO(product);
+		return productDTO;
 	}
-	
-	public int totalItem() {
-		return productDAO.totalItem();
-	}
-	
-	public List<Product> getListByCategoryAndLimit(Integer categoryId, Integer offset, Integer maxResalt){
-		return productDAO.getListByCategoryAndLimit(categoryId, offset, maxResalt);
-	}
-	
-	public int totalProductByCategoryId(Integer categoryId) {
-		return productDAO.totalProductByCategoryId(categoryId);
-	}
-	
-	public List<Product> getListByProductName(String productName){
-		return productDAO.getListByProductName(productName);
-	}
-	
-	public List<Product> getListByCategoryId(Integer categoryId){
-		return productDAO.getListByCategoryId(categoryId);
-	}
-	
-	public List<Product> getListByProducerAndLimit(Integer producerId, Integer offset, Integer maxResult){
-		return productDAO.getListByProducerAndLimit(producerId, offset, maxResult);
-	}
-	
-	public int totalProductByProducerId(Integer producerId) {
-		return productDAO.totalProductByProducerId(producerId);
-	}
-	
 }

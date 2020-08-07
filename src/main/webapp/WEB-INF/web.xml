@@ -35,7 +35,7 @@
 	  	<url-pattern>/*</url-pattern>  
 	 </filter-mapping> 
     
-     <servlet>
+      <servlet>
         <servlet-name>ConnectorServlet</servlet-name>
         <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
         <init-param>
@@ -44,7 +44,7 @@
                 absolute path on local file system or UNC path.
             </description>
             <param-name>XMLConfig</param-name>
-            <param-value>/WEB-INF/config.xml</param-value>
+            <param-value>/src/main/webapp/WEB-INF/config.xml</param-value>
         </init-param>
         <init-param>
             <param-name>debug</param-name>
@@ -57,7 +57,7 @@
         <url-pattern>            
             /src/main/webapp/resources/ckfinder/core/connector/java/connector.java
         </url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> 
        
     <session-config>
         <tracking-mode>COOKIE</tracking-mode>

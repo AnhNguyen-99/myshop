@@ -10,8 +10,22 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<context:annotation-config />
-	<context:component-scan
-		base-package="com.myshop" />
+	
+	<!-- <context:component-scan	base-package="com.myshop.controller" />
+
+	<context:component-scan base-package="com.myshop.api"/>
+	
+	<context:component-scan base-package="com.myshop.service"/>
+	
+	<context:component-scan base-package="com.myshop.dao"/>
+	
+	<context:component-scan base-package="com.myshop.dto"/>
+	
+	<context:component-scan base-package="com.myshop.mapper"/> -->
+	
+	<context:component-scan base-package="com.myshop"/>
+	
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -21,26 +35,28 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	
+
 	<mvc:annotation-driven />
 	<mvc:resources location="/resources/" mapping="/resources/**" cache-period="31556926" />
 
 	<mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>text/plain;charset=UTF-8</value>
-                        <value>text/html;charset=UTF-8</value>
-                        <value>application/json;charset=UTF-8</value>
-                    </list>
-                </property>
-            </bean>
-            <bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
-    
-	
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean
+				class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
@@ -48,8 +64,7 @@
 		</property>
 	</bean>
 
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName"
 			value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
@@ -57,11 +72,10 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<tx:annotation-driven
-		transaction-manager="transactionManager" />
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
@@ -69,7 +83,24 @@
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="packagesToScan" value="com.myshop.entity" />
-		<property name="hibernateProperties" value="classpath:hibernate.properties" />
+		<property name="hibernateProperties"
+			value="classpath:hibernate.properties" />
 	</bean>
-
+     
+    <!-- Spring Email Sender Bean Configuration -->
+    <!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="25"/>
+        <property name="username" value="admin@gmail.com"/>
+        <property name="password" value="password"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean> -->
+    
 </beans>

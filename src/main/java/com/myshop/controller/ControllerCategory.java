@@ -1,13 +1,18 @@
 package com.myshop.controller;
 
+//import java.util.Calendar;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.myshop.dto.CategoryDTO;
+import com.myshop.entity.Account;
 import com.myshop.entity.Category;
 import com.myshop.service.CategoryService;
 
@@ -17,49 +22,63 @@ public class ControllerCategory {
 
 	@Autowired
 	private CategoryService categoryService;
-	
-	// List Category
+		
 	@RequestMapping(value = "/list")
-	public String viewListCategory(Model model) {
-		model.addAttribute("listCategory", categoryService.findAll());
+	public String viewList(Model model) {
+		model.addAttribute("listCategory", categoryService.getAll());
 		return "manages/category_list";
 	}
 	
-	// Create
-	@RequestMapping("/add")
-	public String viewAddCategory(Model model) {
+	// create 
+	@RequestMapping(value = "/create")
+	public String viewCreate(Model model) {
 		model.addAttribute("category", new Category());
 		return "manages/category_form";
 	}
 	
-	// Update 
+	@RequestMapping(value = "/save")
+	public String viewSave(@ModelAttribute("category") Category category, HttpSession session) {
+		Account account = (Account) session.getAttribute("myLogin");
+		category.setAccount(account);
+		boolean bl = false;
+		if(category.getCategoryId() != 0)
+			bl = categoryService.update(category);
+		else
+			bl = categoryService.save(category);
+		if(bl)
+			return "manages/category_list";
+		else
+			return "manages/category_form";
+	}
+	
+	// Edit
 	@RequestMapping(value = "/edit/{categoryId}")
-	public String viewEditor(@PathVariable("categoryId") int categoryId, Model model) {
+	public String viewEdit(@PathVariable("categoryId") int categoryId, Model model) {
 		model.addAttribute("category", categoryService.findById(categoryId));
 		return "manages/category_form";
 	}
 	
-	// Save
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String viewSaveCategory(@ModelAttribute("category") Category category, Model model) {
-		boolean bl = false;
-		if(category.getCategoryId() != 0)
-			categoryService.update(category);
-		else
-			bl = categoryService.save(category);
-		if(bl == true)
-			model.addAttribute("listCustomer", categoryService.findAll());
-		return "manages/category_list";
-	}
-	
+	// Delete
 	@RequestMapping(value = "/delete/{categoryId}")
-	public String viewDelete(@PathVariable("categoryId")int categoryId, Model model) {
+	public String viewDelete(@PathVariable("categoryId") int categoryId, Model model) {
 		Category category = categoryService.findById(categoryId);
-		if(category	!= null) {
-			categoryService.delete(category);
-			model.addAttribute("listCategory", categoryService.findAll());
-		}
-		return "manages/category_list";
+		boolean bl = categoryService.delete(category);
+		if(bl)
+			return "manages/category_list";
+		else
+			return "manages/category_list";
 	}
 	
+	// Call api
+	@RequestMapping(value = "/add")
+	public String viewAdd(Model model, HttpSession session) {
+		Account account = (Account) session.getAttribute("myLogin");
+		CategoryDTO categoryDTO = new CategoryDTO();
+//		Calendar calendar = Calendar.getInstance();
+		categoryDTO.setAccountId(account.getAccountId());
+		categoryDTO.setCategoryStatus(true);
+//		categoryDTO.setCreateDate(calendar.getTime());
+		model.addAttribute("category", categoryDTO);
+		return "manages/category_add";
+	}
 }
