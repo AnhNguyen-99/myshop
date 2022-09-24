@@ -17,7 +17,7 @@ public class ControllerOrder {
 	private OrderService orderService;
 	
 	@Autowired
-	private OrderItemService orderItemService;
+	private OrderItemService OrderItemService;
 	
 	@RequestMapping(value = "/list")
 	public String viewList(Model model) {
@@ -25,11 +25,11 @@ public class ControllerOrder {
 		return "manages/order_list";
 	}
 	
-	@RequestMapping(value = "/orderItem/{orderId}")
+	@RequestMapping(value = "/OrderItem/{orderId}")
 	public String viewOrderItem(@PathVariable("orderId") int orderId, Model model) {
 		model.addAttribute("order", orderService.findById(orderId));
-		model.addAttribute("listOrderItem", orderItemService.getByOrderId(orderId));
-		return "manages/orderItem_list";
+		model.addAttribute("listOrderItem", OrderItemService.getByOrderId(orderId));
+		return "manages/OrderItem_list";
 	}
 	
 	

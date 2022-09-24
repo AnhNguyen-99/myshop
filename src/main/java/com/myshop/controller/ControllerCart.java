@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myshop.entity.Account;
 import com.myshop.entity.Cart;
-import com.myshop.entity.Orderitem;
+import com.myshop.entity.OrderItem;
 import com.myshop.entity.Orders;
 import com.myshop.entity.Product;
 import com.myshop.entity.Statusorder;
@@ -34,7 +34,7 @@ public class ControllerCart {
 	private OrderService orderService;
 	
 	@Autowired
-	private OrderItemService orderItemService;
+	private OrderItemService OrderItemService;
 	
 	@RequestMapping(value = "/add/{productId}")
     public String viewAdd(@PathVariable("productId")int productId, Model model, HttpSession session){
@@ -115,13 +115,13 @@ public class ControllerCart {
 		orders.setStatusorder(statusorder);
 		orders.setTotalPrice(totalPrice(cartItems));
 		orderService.save(orders);
-		Orderitem orderItem = new Orderitem();
-        orderItem.setOrders(orders);
+		OrderItem OrderItem = new OrderItem();
+        OrderItem.setOrders(orders);
 		for (Map.Entry<Integer, Cart> entry : cartItems.entrySet()) {
-            orderItem.setProduct(entry.getValue().getProduct());
-            orderItem.setPrice(entry.getValue().getProduct().getProductPrice() * entry.getValue().getQuantity());
-            orderItem.setQuantity(entry.getValue().getQuantity());
-            orderItemService.save(orderItem);
+            OrderItem.setProduct(entry.getValue().getProduct());
+            OrderItem.setPrice(entry.getValue().getProduct().getProductPrice() * entry.getValue().getQuantity());
+            OrderItem.setQuantity(entry.getValue().getQuantity());
+            OrderItemService.save(OrderItem);
         }
         cartItems = new HashMap<>();
         session.setAttribute("myCartItems", cartItems);

@@ -57,7 +57,7 @@
 												<td>${item.orderDate}</td>
 												<td>${item.statusorder.statusName}</td>
 												<td>
-													<a class='btn btn-default' href='${pageContext.request.contextPath}/manages/order/orderItem/${item.orderId}'><i class='fa fa-edit'></i></a>
+													<a class='btn btn-default' href='${pageContext.request.contextPath}/manages/order/OrderItem/${item.orderId}'><i class='fa fa-edit'></i></a>
 												</td>
 											</tr>
 										</c:forEach>

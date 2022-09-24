@@ -35,7 +35,7 @@ public class Product implements java.io.Serializable {
 	private String productDescription;
 	private Boolean productStatus;
 	private Date createDate;
-	private Set<Orderitem> orderitems = new HashSet<Orderitem>(0);
+	private Set<OrderItem> OrderItems = new HashSet<OrderItem>(0);
 	private Set<Productdetail> productdetails = new HashSet<Productdetail>(0);
 
 	public Product() {
@@ -159,12 +159,12 @@ public class Product implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<Orderitem> getOrderitems() {
-		return this.orderitems;
+	public Set<OrderItem> getOrderItems() {
+		return this.OrderItems;
 	}
 
-	public void setOrderitems(Set<Orderitem> orderitems) {
-		this.orderitems = orderitems;
+	public void setOrderItems(Set<OrderItem> OrderItems) {
+		this.OrderItems = OrderItems;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
@@ -182,7 +182,7 @@ public class Product implements java.io.Serializable {
 				+ producer + ", producerName=" + producerName + ", productImage=" + productImage + ", productPrice="
 				+ productPrice + ", productSale=" + productSale + ", content=" + content + ", productDescription="
 				+ productDescription + ", productStatus=" + productStatus + ", createDate=" + createDate
-				+ ", orderitems=" + orderitems + ", productdetails=" + productdetails + "]";
+				+ ", OrderItems=" + OrderItems + ", productdetails=" + productdetails + "]";
 	}
 
 	

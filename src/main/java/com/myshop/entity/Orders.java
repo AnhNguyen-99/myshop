@@ -33,7 +33,7 @@ public class Orders implements java.io.Serializable {
 	private double totalPrice;
 	private Date orderDate;
 	private Date receiveDate;
-	private Set<Orderitem> orderitems = new HashSet<Orderitem>(0);
+	private Set<OrderItem> OrderItems = new HashSet<OrderItem>(0);
 
 	public Orders() {
 		Calendar calendar = Calendar.getInstance();
@@ -141,12 +141,12 @@ public class Orders implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
-	public Set<Orderitem> getOrderitems() {
-		return this.orderitems;
+	public Set<OrderItem> getOrderItems() {
+		return this.OrderItems;
 	}
 
-	public void setOrderitems(Set<Orderitem> orderitems) {
-		this.orderitems = orderitems;
+	public void setOrderItems(Set<OrderItem> OrderItems) {
+		this.OrderItems = OrderItems;
 	}
 
 }

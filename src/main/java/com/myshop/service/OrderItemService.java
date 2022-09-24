@@ -7,20 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.dao.OrderItemDAO;
-import com.myshop.entity.Orderitem;
+import com.myshop.entity.OrderItem;
 
 @Service
 @Transactional
 public class OrderItemService {
 
 	@Autowired
-	private OrderItemDAO orderItemDAO;
+	private OrderItemDAO OrderItemDAO;
 	
-	public void save(final Orderitem orderitem) {
-		orderItemDAO.save(orderitem);
+	public void save(final OrderItem OrderItem) {
+		OrderItemDAO.save(OrderItem);
 	}
 	
-	public List<Orderitem> getByOrderId(Integer orderId){
-		return orderItemDAO.getByOrderId(orderId);
+	public List<OrderItem> getByOrderId(Integer orderId){
+		return OrderItemDAO.getByOrderId(orderId);
 	}
 }

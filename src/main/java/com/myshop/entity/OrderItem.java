@@ -13,29 +13,29 @@ import javax.persistence.Table;
 import com.myshop.entity.Orders;
 
 @Entity
-@Table(name = "orderitem", catalog = "myshop")
-public class Orderitem implements java.io.Serializable {
+@Table(name = "OrderItem", catalog = "myshop")
+public class OrderItem implements java.io.Serializable {
 
 	private static final long serialVersionUID = 2960663706677393032L;
 	
-	private int orderItemId;
+	private int OrderItemId;
 	private Orders orders;
 	private Product product;
 	private int quantity;
 	private double price;
 
-	public Orderitem() {
+	public OrderItem() {
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "orderItemId", unique = true, nullable = false)
+	@Column(name = "OrderItemId", unique = true, nullable = false)
 	public int getOrderItemId() {
-		return this.orderItemId;
+		return this.OrderItemId;
 	}
 
-	public void setOrderItemId(int orderItemId) {
-		this.orderItemId = orderItemId;
+	public void setOrderItemId(int OrderItemId) {
+		this.OrderItemId = OrderItemId;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
